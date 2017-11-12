@@ -1,0 +1,272 @@
+[
+ {
+   "Site Name": "Seabreeze Environmental Landfill",
+   "County": "Brazoria",
+   "Latitude": 29.089458,
+   "Longitude": -95.366661,
+   "Type": 1,
+   "Status": "Active",
+   "Permit #": "1539B",
+   "Permit Holder Name": "Waste Connections, Inc."
+ },
+ {
+   "Site Name": "Chambers County Landfill",
+   "County": "Chambers",
+   "Latitude": 29.8,
+   "Longitude": -94.52,
+   "Type": 1,
+   "Status": "Active",
+   "Permit #": "1502",
+   "Permit Holder Name": "Chambers County"
+ },
+ {
+   "Site Name": "Baytown Landfill",
+   "County": "Chambers",
+   "Latitude": 29.676197,
+   "Longitude": -94.920094,
+   "Type": 1,
+   "Status": "Active",
+   "Permit #": "1535B",
+   "Permit Holder Name": "USA Waste of Texas Landfills, Inc"
+ },
+ {
+   "Site Name": "Altair Landfill",
+   "County": "Colorado",
+   "Latitude": 29.598692,
+   "Longitude": -96.486891,
+   "Type": 1,
+   "Status": "Active",
+   "Permit #": "203A",
+   "Permit Holder Name": "Clean Harbors/Altair Disposal Services"
+ },
+ {
+   "Site Name": "Blue Ridge Landfill",
+   "County": "Fort Bend",
+   "Latitude": 29.56,
+   "Longitude": -95.45,
+   "Type": 1,
+   "Status": "Active",
+   "Permit #": "1505A",
+   "Permit Holder Name": "Blue Ridge Landfill Texas, LP"
+ },
+ {
+   "Site Name": "Fort Bend Regional Landfill",
+   "County": "Fort Bend",
+   "Latitude": 29.395526,
+   "Longitude": -95.723032,
+   "Type": 1,
+   "Status": "Active",
+   "Permit #": "2270",
+   "Permit Holder Name": "Waste Corporation of Texas, LP"
+ },
+ {
+   "Site Name": "Galveston County Landfill",
+   "County": "Galveston",
+   "Latitude": 29.377894,
+   "Longitude": -95.052524,
+   "Type": 1,
+   "Status": "Active",
+   "Permit #": "1149A",
+   "Permit Holder Name": "Galveston County Landfill TX, LP"
+ },
+ {
+   "Site Name": "Coastal Plains Landfill",
+   "County": "Galveston",
+   "Latitude": 29.417647,
+   "Longitude": -95.196976,
+   "Type": 1,
+   "Status": "Active",
+   "Permit #": "1721A",
+   "Permit Holder Name": "Waste Management of Texas, Inc."
+ },
+ {
+   "Site Name": "McCarty Road Landfill",
+   "County": "Harris",
+   "Latitude": 29.8275,
+   "Longitude": -95.24333,
+   "Type": 1,
+   "Status": "Active",
+   "Permit #": "261B",
+   "Permit Holder Name": "McCarty Road Landfill Texas, LP"
+ },
+ {
+   "Site Name": "Whispering Pines Landfill",
+   "County": "Harris",
+   "Latitude": 29.879095,
+   "Longitude": -95.269119,
+   "Type": 1,
+   "Status": "Active",
+   "Permit #": "1193",
+   "Permit Holder Name": "Whispering Pines Landfill Texas, LP"
+ },
+ {
+   "Site Name": "Atascocita Landfill",
+   "County": "Harris",
+   "Latitude": 29.96,
+   "Longitude": -95.24,
+   "Type": 1,
+   "Status": "Active",
+   "Permit #": "1307C",
+   "Permit Holder Name": "Waste Management of Texas, Inc."
+ },
+ {
+   "Site Name": "Security Landfill",
+   "County": "Montgomery",
+   "Latitude": 30.32,
+   "Longitude": -95.27,
+   "Type": 1,
+   "Status": "Active",
+   "Permit #": "1752B",
+   "Permit Holder Name": "Waste Management of Texas, Inc."
+ },
+ {
+   "Site Name": "Dixie Farm Road Landfill",
+   "County": "Brazoria",
+   "Latitude": 29.525846,
+   "Longitude": -95.253178,
+   "Type": 4,
+   "Status": "Active",
+   "Permit #": "1708",
+   "Permit Holder Name": "Hill Sand Company, Inc."
+ },
+ {
+   "Site Name": "Sprint Fort Bend County Landfill",
+   "County": "Fort Bend",
+   "Latitude": 29.66,
+   "Longitude": -95.67,
+   "Type": 4,
+   "Status": "Active",
+   "Permit #": "1797A",
+   "Permit Holder Name": "Poarch-Swinbank Management, Inc."
+ },
+ {
+   "Site Name": "Sprint Fort Bend County Landfill",
+   "County": "Fort Bend",
+   "Latitude": 29.66,
+   "Longitude": -95.67,
+   "Type": 4,
+   "Status": "Active",
+   "Permit #": "1797A",
+   "Permit Holder Name": "Poarch-Swinbank Management, Inc."
+ },
+ {
+   "Site Name": "North County Landfill",
+   "County": "Galveston",
+   "Latitude": 29.485539,
+   "Longitude": -95.053506,
+   "Type": 4,
+   "Status": "Active",
+   "Permit #": "1849B",
+   "Permit Holder Name": "Republic Waste Services of Texas"
+ },
+ {
+   "Site Name": "Addicks-Fairbanks Landfill",
+   "County": "Harris",
+   "Latitude": 29.871365,
+   "Longitude": -95.62121,
+   "Type": 4,
+   "Status": "Active",
+   "Permit #": "1301",
+   "Permit Holder Name": "USA Waste of Texas Landfills, Inc."
+ },
+ {
+   "Site Name": "Casco Landfill",
+   "County": "Harris",
+   "Latitude": 29.606752,
+   "Longitude": -95.404158,
+   "Type": 4,
+   "Status": "Active",
+   "Permit #": "1403",
+   "Permit Holder Name": "Casco Hauling and Excavation"
+ },
+ {
+   "Site Name": "Greenshadow Landfill",
+   "County": "Harris",
+   "Latitude": 29.69583,
+   "Longitude": -95.14722,
+   "Type": 4,
+   "Status": "Active",
+   "Permit #": "1540A",
+   "Permit Holder Name": "USA Waste of Texas Landfills, Inc."
+ },
+ {
+   "Site Name": "Fairbanks Landfill",
+   "County": "Harris",
+   "Latitude": 29.900243,
+   "Longitude": -95.531264,
+   "Type": 4,
+   "Status": "Active",
+   "Permit #": "1565A",
+   "Permit Holder Name": "USA Waste of Texas Landfills, Inc."
+ },
+ {
+   "Site Name": "Greenbelt Landfill",
+   "County": "Harris",
+   "Latitude": 29.620843,
+   "Longitude": -95.190632,
+   "Type": 4,
+   "Status": "Active",
+   "Permit #": "1586A",
+   "Permit Holder Name": "Waste Corporaton of Texas, LP"
+ },
+ {
+   "Site Name": "Greenhouse Road Landfill",
+   "County": "Harris",
+   "Latitude": 29.821878,
+   "Longitude": -95.702142,
+   "Type": 4,
+   "Status": "Active",
+   "Permit #": "1599B",
+   "Permit Holder Name": "Greenhouse Road Landfill, LP"
+ },
+ {
+   "Site Name": "Cougar Landfill",
+   "County": "Harris",
+   "Latitude": 29.894481,
+   "Longitude": -95.263222,
+   "Type": 4,
+   "Status": "Active",
+   "Permit #": "1921A",
+   "Permit Holder Name": "Cougar Landfill, Inc."
+ },
+ {
+   "Site Name": "Hawthorn Park Landfill",
+   "County": "Harris",
+   "Latitude": 29.85483,
+   "Longitude": -95.55167,
+   "Type": 4,
+   "Status": "Active",
+   "Permit #": "2185",
+   "Permit Holder Name": "USA Waste of Texas Landfills, Inc."
+ },
+ {
+   "Site Name": "Ralston Road Landfill",
+   "County": "Harris",
+   "Latitude": 29.82033,
+   "Longitude": -95.2245,
+   "Type": 4,
+   "Status": "Active",
+   "Permit #": "2240",
+   "Permit Holder Name": "Waste Corporation of Texas, Inc."
+ },
+ {
+   "Site Name": "Tall Pines Landfill",
+   "County": "Harris",
+   "Latitude": 29.988965,
+   "Longitude": -95.388334,
+   "Type": 4,
+   "Status": "Active",
+   "Permit #": "2304",
+   "Permit Holder Name": "Waste Corporation of Texas, LP"
+ },
+ {
+   "Site Name": "Lone Star Recycling and Disposal Facility",
+   "County": "Harris",
+   "Latitude": 29.591769,
+   "Longitude": -95.445636,
+   "Type": 4,
+   "Status": "Active",
+   "Permit #": "2344",
+   "Permit Holder Name": "Delta Waste Services, LP"
+ }
+]
