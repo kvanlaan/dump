@@ -1,0 +1,13 @@
+<div class="height-100">
+  <div style="height: 10%">
+    <div class="header">
+      <h1 [class]="margin">Dump</h1>
+    </div>
+    <!-- <mat-input-container class="white">
+      <input matInput [(ngModel)]="val" class="white" placeholder="What do you need to dump?" value="val">
+    </mat-input-container>  -->
+  <typeahead (suggestionSelected)="filterQuery($event)" [list]="list" [displayProperty]="'label'"[searchProperty]="'label'"></typeahead>
+  </div>
+
+<router-outlet></router-outlet>
+</div>

@@ -1,0 +1,57 @@
+<mat-sidenav-container [style.opacity]="showing" class="example-container">
+  <mat-sidenav #sidenav fxLayout="column" class="example-sidenav" mode="side" opened="true">
+    <div class="green white" style="height: 104px">
+      <div fxLayout="row">
+        <i class="material-icons pointer" (click)="goBack()" style="opacity: .75; width: 30px;">reply</i>
+        <div fxFlexAlign="end" style="font-size: 13px; padding-right: 5px; width: 30px; color: rgba(255,255,255,0.45)"> <span> from</span></div>
+        <mat-form-field style="height: 40px !important; width: 264px">
+          <input matInput [(ngModel)]="origin" value="{{origin}}" (setAddress)="getAddress($event, 'origin')" style="padding-bottom: 0px !important;"
+            googleplace>
+        </mat-form-field>
+      </div>
+      <i class="material-icons float-right pointer" style="opacity: .75; margin-right:5%; margin-top: -3%;" fxFlexAlign="end" (click)="switch()">import_export</i>
+      <div fxLayout="row">
+        <i class="material-icons" style="width: 30px;"></i>
+        <div fxFlexAlign="center" style="padding-right: 5px; font-size: 13px; width: 30px; color: rgba(255,255,255,0.45)"><span> to</span></div>
+        <mat-form-field style="border-top: 0px !important; width: 264px">
+          <input matInput style="border-top: 0px !important;" value="{{destination}}" (setAddress)="getAddress($event, 'destination')"  googleplace>
+        </mat-form-field>
+      </div>
+    </div>
+    <div style="background-color: #FFFFFF; height: auto; margin-left: 24px !important" *ngIf="directions">
+      <mat-card-subtitle style="block-size: 19px !important;" class="text-align-left">
+        <h2 style="margin-bottom: 0px; block-size: 19px !important;font-weight: 500; white-space: normal; color: rgba(0, 0, 0, 0.87);font-size: 16px">
+        {{orgOne}}</h2>
+        <div class="float-left">{{orgTwo}}</div>
+        <div style="margin-top: 20px">
+          <div *ngFor="let dir of directions; let i = index" fxLayout="row">
+            <i style="color:rgba(0, 0, 0, 0.87); opacity: 0.4; padding-top: 18px;" class="material-icons">keyboard_arrow_right</i>
+            <div style="padding-left: 14px;" fxLayout="column">
+              <div style="padding-top: 20px; padding-bottom: 20px; color: #6C6C6C;">{{dir.instructions}}</div>
+              <div><span style="font-size: 11px;">{{dir.duration.text}} ({{dir.distance.text}})</span><span fxFlex style="margin-bottom: 1%; font-size: 11px; border-bottom: 1px solid lightgrey"> </span></div>
+            </div>
+          </div>
+        </div>
+        <h2 style="margin-top: 20px; margin-bottom: 0px; block-size: 19px !important;font-weight: 500; white-space: normal; color: rgba(0, 0, 0, 0.87);font-size: 16px">
+        {{destOne}}</h2>
+        <div style="margin-bottom: 20px;" class="float-left">{{destTwo}}</div>
+      </mat-card-subtitle>
+    </div>
+  </mat-sidenav>
+
+  <div class="example-sidenav-content">
+
+    <span [style.opacity]="showing">
+        <!-- <button type="button" mat-button (click)="sidenav.toggle()">
+            Open sidenav
+          </button> -->
+      <agm-map [style.height.px]="mapHeight" [scrollwheel]="false"  [latitude]="lat" [longitude]="lng">
+        <directions #directionsList (directionsUpdate)="directionsUpdate()"></directions>
+      </agm-map>
+      </span>
+  </div>
+</mat-sidenav-container>
+
+<div *ngIf="!ready" class="height-100">
+  <div class="margin-auto loader"></div>
+</div>

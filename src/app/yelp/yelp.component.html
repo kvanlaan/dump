@@ -1,0 +1,28 @@
+
+    <div fxLayout="row" style="border-bottom: 1px solid #ddd" class="padding-2" *ngFor="let listing of list">
+        <mat-card-header fxFlex="100">
+          <div class="text-align-left" style="border-right: 1px solid #ddd;" fxFlex="60" fxLayout="column">
+          <mat-card-title  fxFlex="10"> {{listing.name}}           
+          </mat-card-title>
+          <mat-card-subtitle fxFlex="90" fxLayout="column">
+              <strong> Categories: </strong> {{listing.categories}}
+              <br>
+              <br>
+              <div fxFlexAlign="start end">
+            <strong  *ngIf="!listing.is_closed"> Open Now! </strong>
+            <strong *ngIf="listing.is_closed"> Now Closed </strong> </div>
+          </mat-card-subtitle>
+        </div>
+        <div fxFlex="20" fxLayout="column"  class="padding-left-5">
+            <mat-card-subtitle fxLayout="column"  fxLayoutAlign="center" fxFlex="100" style="font-size: 10px; margin: auto;">
+            <div>{{listing.display_phone}} </div>
+            <div>{{listing.location.address}}, {{listing.location.city}}, {{listing.location.state_code}} </div>
+            <button fxFlexAlign="end center" mat-button (click)="navigate(listing.Address)" [routerLink]="['map', listing.address]">Get Directions</button>
+          </mat-card-subtitle>
+        </div>
+        <div fxFlex class="padding-left-5 margin-auto">
+          <img src="https://maps.googleapis.com/maps/api/streetview?size=600x300&location={{listing.location.coordinate.latitude}},{{listing.location.coordinate.longitude}}&heading=151.78&pitch=-0.76&key=AIzaSyA_JKefOG1BM8rJZoLt7p6OCEdnwPtjiWM"
+        />
+        </div>
+      </mat-card-header>
+    </div>

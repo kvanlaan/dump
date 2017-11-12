@@ -1,0 +1,347 @@
+/* You can add global styles to this file, and also import other style files */
+​
+#hello{
+    background: red;
+}
+.red {
+    color: red;
+}
+p+p {
+    text-indent: 0;
+    margin-top: 0;
+}
+
+p {
+    max-width: 80ch;
+    margin-left: 0;
+    margin-right: auto;
+}
+
+ul, ol {
+    max-width: 80ch;
+    margin-left: 0;
+    margin-right: auto;
+}
+.pointer {
+    cursor: pointer;
+}
+
+/**
+ * BOX-SIZING
+ */
+
+/**
+ * GRIDS
+ */
+
+/**
+ * GENERAL
+ */
+
+img {
+    max-width: 100%;
+}
+body {
+    font-family: Roboto, Arial, sans-serif;
+}
+
+/**
+ * App code
+ */
+ .block {
+    display: block;
+ }
+.material-text {
+    color: #A6A6A6;
+    font-family: Roboto, Arial, sans-serif
+}
+.margin-top-20 {
+    margin-top: 20%;
+}
+.margin-top-10 {
+    margin-top: 10%;
+}
+
+.margin-top-0 {
+    margin-top: 0%;
+}
+.height-100 {
+    height: 100%;
+}
+a {
+    color: #85D9BF;
+}
+body {
+    background-color:#85D9BF;
+    text-align: center;
+    margin: 0px !important;
+ }
+ .green {
+    background-color:#85D9BF;
+ }
+.material-icons {
+    outline: none;
+    border: none;
+}
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+ h1 {
+    text-align: center;
+    width: 100%;
+    color: white;
+    margin-top: 5%;
+ }
+
+ .lowercase {
+    text-transform: lowercase;
+ }
+
+h3 {
+   text-align: left;
+   text-decoration: underline;
+   text-transform: none;
+   font-size:30px;
+   width: 100%;
+   color: white;
+   display: inline-block;
+}
+
+.material-icons:hover {
+    opacity: 1 !important;
+}
+
+.pagination-next:after{
+    content: '' !important;
+}
+.pagination-next.disabled::after{
+    content: '' !important;
+}
+.pagination-next.disabled{
+  display: none;
+}
+.pagination-previous.disabled{
+  display: none;
+}
+.pagination-previous::before{
+    content: '' !important;
+}
+.pagination-previous.disabled::before{
+    content: '' !important;
+}
+.show-for-sr::before{
+    content: '' !important;
+}
+.show-for-sr::after{
+    content: '' !important;
+}
+a::after {
+    content: '' !important;
+}
+a::before {
+    content: '' !important;
+}
+
+.float-right {
+  float: right;
+}
+
+.float-left {
+  float: left;
+}
+.no-float {
+    float: none;
+}
+
+.inline {
+  display: inline;
+}
+input:focus {
+  outline: none;
+}
+input {
+  padding: 1px 15px 1px 15px;
+}
+.link:hover {
+ outline: none;
+ cursor: pointer;
+}
+.loading-position {
+  margin: 0px; padding: 0px; position: fixed; right: 0px; top: 0px; width: 100%; height: 100%;
+}
+
+.loader {
+    border: 8px solid #f3f3f3; /* Light grey */
+    border-top: 8px solid  #85D9BF; /* Blue */
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: calc(50% - 20px);
+    left: calc(50% - 20px);
+    animation: spin 1.5s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+.margin-auto {
+  margin: auto;
+}
+.margin-1 {
+  margin: 1%;
+}
+.margin-3 {
+  margin: 3%;
+}
+.margin-left-1 {
+  margin-left: 1%  !important;
+}
+.margin-right-1 {
+  margin-right: 1%  !important;
+}
+.margin-bot-0{
+  margin-bottom: 0%;
+}
+.margin-bot-1{
+  margin-bottom: 1%;
+}
+.margin-bot-3{
+  margin-bottom: 3%;
+}
+.margin-top-0{
+  margin-top: 0%;
+}
+.margin-top-1{
+  margin-top: 1% !important;
+}
+.mat-form-field-infix {
+    border-top: 0px;
+}
+.mat-expansion-indicator {
+    display: none;
+}
+.noNav .mat-icon-button {
+    display: none;
+}
+
+.overflow-hidden {
+  overflow: hidden !important;
+}
+.overflow-scroll {
+  overflow:scroll;
+}
+.padding-0{
+  padding: 0px !important;
+}
+.padding-1{
+  padding: 1px !important;
+}
+.padding-1p5{
+  padding: 1.5px !important;
+}
+.padding-1p75{
+  padding: 1.75px !important;
+}
+.padding-2{
+    padding: 2px !important;
+}
+.padding-5{
+  padding: 5px !important;
+}
+.padding-left-5{
+  padding-left: 5px !important;
+}
+.padding-left-20{
+  padding-left: 20px !important;
+}
+.padding-bottom-5{
+  padding-bottom: 5px !important;
+}
+.padding-top-5{
+  padding-top: 5px !important;
+}
+.padding-top-20 {
+  padding-top: 20px !important;
+}
+.scroll {
+  overflow-y: auto;
+  overflow-x: auto;
+}
+.text-align-left {
+    text-align: left;
+}
+.text-align-center {
+    text-align: center;
+}
+
+.yellow-background {
+    background: #FCF8E3 !important;
+}
+
+md-spinner {
+    color: white;
+}
+.mat-input-ripple {
+    background-color:white !important;
+}
+.mat-input-placeholder {
+ color: white !important;
+}
+
+.white {
+    fill: white !important;
+    color: white !important;
+}
+.mat-focused  {
+    fill: white !important;
+    color: white !important;
+}
+.mat-input-underline .mat-focused {
+    background-color: white;
+}
+.mat-input-wrapper {
+    color: white !important;
+}
+.mat-input-container {
+    color: white !important;
+}
+.mat-input-wrapper {
+    color: white !important;
+}
+.mat-input-infix {
+    color: white !important;
+}
+.mat-input-element {
+    color: white !important;
+}
+.mat-focused {
+    color: white !important;
+}
+.mat-input-wrapper {
+    color: white !important;
+}
+img {
+   width: 150px;
+   height: 100px;
+}
+
+.mat-form-field-underline { 
+    background-color: white;
+}
+  
+@media only screen and (max-width: 900px) {
+
+}
+
+@media only screen and (max-width: 640px) {
+
+h3 {
+    font-size: 30px;
+}
+
+.button {
+    font-size: 13px;
+}
+
+}

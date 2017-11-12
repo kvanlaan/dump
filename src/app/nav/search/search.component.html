@@ -1,0 +1,18 @@
+<div *ngIf="searchDone" style="width: 58%; margin: auto !important;" > <mat-expansion-panel style="margin: auto !important; z-index: 3">
+    <mat-expansion-panel-header>
+      <mat-panel-title fxLayout="row" fxFlex="100">
+        Showing results for&nbsp;<span style="font-style: italic; font-weight: bold">{{query}}</span>&nbsp;nearest to your current location <span fxFlex fxLayoutAlign="end"> Showing 1- <span *ngIf="this.finalData.length < 10"> {{this.finalData.length}}</span><span *ngIf="this.finalData.length >= 10">{{pageSize}}</span>&nbsp; of {{this.finalData.length}} </span>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+  </mat-expansion-panel>
+<mat-card style="padding-top: 0; border-top: 1px solid #ddd;" class="yellow-background margin-auto text-align-center overflow-scroll">
+    <app-recycling *ngIf="showRecycling" [list]="displayedData"></app-recycling>
+    <app-landfill *ngIf="showLandfill" [list]="displayedData"></app-landfill>
+    <app-yelp  *ngIf="showYelp"  [list]="displayedData"></app-yelp>
+    <mat-card-footer>
+      <mat-paginator *ngIf="searchDone" [ngClass]="{'noNav': this.pages === 1}" [length]="finalData.length" [pageSize]="pageSize"  (page)="changePage($event);">
+    </mat-paginator>
+    </mat-card-footer>
+  </mat-card>
+</div>
+<div *ngIf="!searchDone" class="margin-auto loader"></div>
