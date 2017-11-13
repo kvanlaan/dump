@@ -75,7 +75,9 @@ export class MapComponent implements OnInit {
 
   ngOnInit() {
     const url = new URL(window.location.href);
-    const address = url.pathname.split('/')[2];
+    console.log('url', url);
+    const mapIndex = url.pathname.split('/').indexOf('map');
+    const address = url.pathname.split('/')[mapIndex + 1];
     if (address) {
       this.destination = address.replace(/%20/g, ' ');
     }

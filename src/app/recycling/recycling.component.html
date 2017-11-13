@@ -1,14 +1,18 @@
     <div fxLayout="row" style="border-bottom: 1px solid #ddd" class="padding-2" *ngFor="let listing of list">
       <mat-card-header fxFlex="100" >
-        <div class="text-align-left" fxLayout="column" style="border-right: 1px solid #ddd;" fxFlex="60">
+          <div  style="border-right: 1px solid #ddd;" fxFlex class="padding-left-5 padding-right-5">
+              <img src="https://maps.googleapis.com/maps/api/streetview?size=600x300&location={{listing.Lat}},{{listing.Lon}}&heading=151.78&pitch=-0.76&key=AIzaSyA_JKefOG1BM8rJZoLt7p6OCEdnwPtjiWM" />
+            </div>
+        <div class="text-align-left" fxLayout="column" style="padding: 5px; border-right: 1px solid #ddd;" fxFlex="60">
           <mat-card-title fxFlex="10"> {{listing.Business}}</mat-card-title>
           <mat-card-subtitle fxFlex="90" fxLayout="column">
-              <strong> Materials:</strong> {{listing.Materials}}
-            <br>
+            <div>
+              <strong> Materials:</strong> {{listing.Materials}} </div>
             <br>
           <div fxFlexAlign="start end"><strong> Hours: </strong>  {{listing.Hours}} </div>
           </mat-card-subtitle>
         </div>
+
         <div fxFlex="20" fxLayout="column"  class="padding-left-5">
           <mat-card-subtitle fxLayout="column"  fxLayoutAlign="center" fxFlex="100" style="font-size: 10px; margin: auto;">
             <div>{{listing.Phone}} </div>
@@ -17,8 +21,6 @@
             [routerLink]="['/map/', listing.Address]">Get Directions</button>
           </mat-card-subtitle>
         </div>
-        <div fxFlex class="padding-left-5 margin-auto">
-          <img src="https://maps.googleapis.com/maps/api/streetview?size=600x300&location={{listing.Lat}},{{listing.Lon}}&heading=151.78&pitch=-0.76&key=AIzaSyA_JKefOG1BM8rJZoLt7p6OCEdnwPtjiWM" />
-        </div>
+   
       </mat-card-header>
     </div>

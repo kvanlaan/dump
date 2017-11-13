@@ -252,6 +252,9 @@ input {
 .padding-left-5{
   padding-left: 5px !important;
 }
+.padding-right-5{
+    padding-right: 5px !important;
+  }
 .padding-left-20{
   padding-left: 20px !important;
 }
