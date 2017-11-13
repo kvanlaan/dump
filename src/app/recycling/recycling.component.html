@@ -1,9 +1,9 @@
     <div fxLayout="row" style="border-bottom: 1px solid #ddd" class="padding-2" *ngFor="let listing of list">
       <mat-card-header fxFlex="100" >
-          <div  style="border-right: 1px solid #ddd;" fxFlex class="padding-left-5 padding-right-5">
+          <div style="border-right: 1px solid #ddd;" fxFlex class="padding-left-5 padding-right-5">
               <img src="https://maps.googleapis.com/maps/api/streetview?size=600x300&location={{listing.Lat}},{{listing.Lon}}&heading=151.78&pitch=-0.76&key=AIzaSyA_JKefOG1BM8rJZoLt7p6OCEdnwPtjiWM" />
             </div>
-        <div class="text-align-left" fxLayout="column" style="padding: 5px; border-right: 1px solid #ddd;" fxFlex="60">
+        <div class="text-align-left" fxLayout="column" style="padding-left: 5px; border-right: 1px solid #ddd;" fxFlex="60">
           <mat-card-title fxFlex="10"> {{listing.Business}}</mat-card-title>
           <mat-card-subtitle fxFlex="90" fxLayout="column">
             <div>
