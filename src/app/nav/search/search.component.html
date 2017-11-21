@@ -1,7 +1,9 @@
 <div *ngIf="searchDone" style="width: 58%; margin: auto !important;" > <mat-expansion-panel style="margin: auto !important; z-index: 3">
     <mat-expansion-panel-header>
       <mat-panel-title fxLayout="row" fxFlex="100">
-        Showing results for&nbsp;<span style="font-style: italic; font-weight: bold">{{query}}</span>&nbsp;nearest to your current location <span fxFlex fxLayoutAlign="end"> Showing 1- <span *ngIf="this.finalData.length < 10"> {{this.finalData.length}}</span><span *ngIf="this.finalData.length >= 10">{{pageSize}}</span>&nbsp; of {{this.finalData.length}} </span>
+        Showing results for&nbsp;<span style="font-style: italic; font-weight: bold">{{query}}</span>&nbsp;nearest to your current location<span *ngIf="badQuery">.&nbsp;No listings for 
+            <span style="font-style: italic; font-weight: bold">{{badQuery}}.</span>
+           </span> <span fxFlex fxLayoutAlign="end"> Showing 1- <span *ngIf="this.finalData.length < 10"> {{this.finalData.length}}</span><span *ngIf="this.finalData.length >= 10">{{pageSize}}</span>&nbsp; of {{this.finalData.length}} </span>
       </mat-panel-title>
     </mat-expansion-panel-header>
   </mat-expansion-panel>
@@ -17,5 +19,4 @@
   </mat-card>
 </div>
 
-<div *ngIf="searchDone && showNone"> Your query found no listings. Please try again. </div>
 <div *ngIf="!searchDone" class="margin-auto loader"></div>

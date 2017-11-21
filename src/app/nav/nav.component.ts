@@ -19,7 +19,10 @@ import * as similarity from 'similarity';
 export class NavComponent implements OnInit {
   margin = 'margin-top-20';
   searchQuery: string;
+  badQueryString = '';
+  label = '';
   showBadQuery = false;
+  showFancyBadQuery = false;
   list: Array<Item> = [
     { label: 'clothing', value: 'clothing' },
     { label: 'pants', value: 'clothing' },
@@ -90,18 +93,24 @@ export class NavComponent implements OnInit {
     { label: 'dead bodies', value: 'body' }
   ]
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private route: ActivatedRoute) {
   }
 
   ngOnInit() {
     const url = new URL(window.location.href);
     if (url.href.indexOf('search') > -1) {
+      const urlArr = url.href.split('/home');
+      const urlArrTwo = urlArr[1].split('/');
+      const searchIndex = urlArrTwo.indexOf('search');
+      this.label = urlArrTwo[searchIndex + 1];
+      this.label = this.label.replace(/%20/g, ' ');
       this.margin = 'margin-top-1';
     } else {
       this.margin = 'margin-top-20';
     }
 
     this.router.events.subscribe(async (event: NavigationEnd) => {
+      console.log('this.label', this.label);
       if (event instanceof NavigationEnd) {
         const urlTwo = new URL(window.location.href);
         if (urlTwo.href.indexOf('search') > -1) {
@@ -116,16 +125,22 @@ export class NavComponent implements OnInit {
   filterQuery(event: any) {
     this.showBadQuery = false;
     if (event !== undefined) {
-      const label = event.label;
+      this.label = event.label;
       this.margin = 'margin-top-1';
-      this.router.navigate(['home/search/', label]);
+      this.router.navigate(['home/search/', this.label]);
     }
   }
   badQuery(event: any) {
     const urlThree = new URL(window.location.href);
-    if (urlThree.href.indexOf('search') < -1) {
+    this.badQueryString = event;
+    if (urlThree.href.indexOf('search') < 0) {
       this.showBadQuery = true;
+
+    } else {
+      this.router.navigate(['home/search/' + this.label + '/bad/', event]);
     }
+
+
   }
 }
 

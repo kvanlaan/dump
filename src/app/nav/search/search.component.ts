@@ -20,6 +20,7 @@ export class SearchComponent implements OnInit {
   currPageIndex = 0;
   pages: number;
   searchDone = false;
+  badQuery = '';
   showYelp = false;
   showRecycling = false;
   showLandfill = false;
@@ -109,12 +110,21 @@ export class SearchComponent implements OnInit {
 
       this.route.params.subscribe(params => {
         this.label = params['id'];
+        if (params['idTwo']) {
+          this.badQuery = params['idTwo'];
+        }
       });
       this.router.events.subscribe(async (event: NavigationEnd) => {
         if (event instanceof NavigationEnd) {
           this.route.params.subscribe(params => {
-            this.label = params['id'];
-            this.search();
+            if (params['idTwo']) {
+              this.badQuery = params['idTwo'];
+              console.log('this.badQuery', this.badQuery);
+            }
+            if (params['id'] !== this.label) {
+              this.label = params['id'];
+              this.search();
+            }
           });
         }
       })
@@ -216,7 +226,7 @@ export class SearchComponent implements OnInit {
       const dataObject = resultsArr[i]
       // get curr coords
       const hypO = (Math.pow(dataObject.Latitude - this.lat, 2) +
-       Math.pow(dataObject.Longitude - this.lng, 2))
+        Math.pow(dataObject.Longitude - this.lng, 2))
       const hypObj = { x: i, y: hypO, z: { dataObject } }
       objArr.push(hypObj)
     }
@@ -237,7 +247,7 @@ export class SearchComponent implements OnInit {
       const dataObject = resultsArr[i]
       // get curr coords
       const hypO = (Math.pow(dataObject.location.coordinate.latitude - this.lat, 2) +
-       Math.pow(dataObject.location.coordinate.longitude - this.lng, 2))
+        Math.pow(dataObject.location.coordinate.longitude - this.lng, 2))
       const hypObj = { x: i, y: hypO, z: { dataObject } }
       objArr.push(hypObj)
     }

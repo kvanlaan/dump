@@ -1,13 +1,10 @@
 <div class="height-100">
   <div style="height: 10%">
     <div class="header">
-      <h1 [class]="margin">Dump</h1>
+<h1 [class]="margin" >Dump</h1>
     </div>
-    <!-- <mat-input-container class="white">
-      <input matInput [(ngModel)]="val" class="white" placeholder="What do you need to dump?" value="val">
-    </mat-input-container>  -->
-  <typeahead (badQuery)="badQuery($event)" (suggestionSelected)="filterQuery($event)" [list]="list" [displayProperty]="'label'" [searchProperty]="'label'"></typeahead>
+<typeahead (badQuery)="badQuery($event)" (suggestionSelected)="filterQuery($event)" [list]="list" [displayProperty]="'label'" [searchProperty]="'label'"></typeahead>
   </div>
-  <div class="white" *ngIf="showBadQuery"> Your query found no listings. Please try again. </div>
+  <div class="white" *ngIf="showBadQuery"> Your query <span style="font-style: italic;">{{badQueryString}}</span> found no listings. Please try again. </div>
 <router-outlet></router-outlet>
 </div>

@@ -10,6 +10,7 @@ const routes: Routes = [
 
   children: [
     { path: 'search/:id', component: SearchComponent },
+    { path: 'search/:id/bad/:idTwo', component: SearchComponent },
   ]
 },
   { path: 'map/:id', component: MapComponent  }

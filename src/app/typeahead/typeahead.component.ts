@@ -215,14 +215,11 @@ export class TypeaheadComponent implements OnInit, ControlValueAccessor {
   handleKeyboardEvent(event: KeyboardEvent) {
     const x = event.keyCode;
     if (x === 13) {
-      if (this.input && this.selectedSuggestion === undefined) {
-        const suggestion = this.list.find(item => similarity(this.input, item.label) > 0.5) // change so it's the max
+      if (this.input && !this.selectedSuggestion) {
+        const suggestion = this.list.find(item => similarity(this.input, item.label) > 0.6) // change so it's the max
         if (suggestion !== undefined) {
-          console.log('suggestion', suggestion);
           this.suggestionSelected.emit(suggestion);
         } else {
-          console.log('emiting active', this.activeSuggestion);
-          this.suggestionSelected.emit(this.activeSuggestion);
           this.badQuery.emit(this.input);
         }
       } else {
