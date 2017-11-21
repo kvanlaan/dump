@@ -224,6 +224,7 @@ export class TypeaheadComponent implements OnInit, ControlValueAccessor {
         }
       } else {
         console.log('failed b', this.input, 'selected suggestion', this.selectedSuggestion);
+        this.suggestionSelected.emit(this.selectedSuggestion);
       }
     }
   }

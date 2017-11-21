@@ -113,6 +113,7 @@ export class SearchComponent implements OnInit {
         if (params['idTwo']) {
           this.badQuery = params['idTwo'];
         }
+        this.search();
       });
       this.router.events.subscribe(async (event: NavigationEnd) => {
         if (event instanceof NavigationEnd) {
@@ -124,11 +125,12 @@ export class SearchComponent implements OnInit {
             if (params['id'] !== this.label) {
               this.label = params['id'];
               this.search();
+            } else {
+              console.log('failed bc stupid');
             }
           });
         }
       })
-      this.search();
     }
   }
   search() {
