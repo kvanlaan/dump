@@ -16,7 +16,7 @@
             <mat-card-subtitle fxLayout="column"  fxLayoutAlign="center" fxFlex="100" style="font-size: 10px; margin: auto;">
               <div>{{listing.County}}&nbsp;County </div>
               <button fxFlexAlign="end" mat-button 
-              [routerLink]="['/map/', listing.Address]">Get Directions</button>
+              [routerLink]="['/map/', listing['Site Name'] + ',' + listing.County]">Get Directions</button>
             </mat-card-subtitle>
           </div>
   

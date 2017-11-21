@@ -9,10 +9,13 @@
     <app-recycling *ngIf="showRecycling" [list]="displayedData"></app-recycling>
     <app-landfill *ngIf="showLandfill" [list]="displayedData"></app-landfill>
     <app-yelp  *ngIf="showYelp"  [list]="displayedData"></app-yelp>
+
     <mat-card-footer>
       <mat-paginator *ngIf="searchDone" [ngClass]="{'noNav': this.pages === 1}" [length]="finalData.length" [pageSize]="pageSize"  (page)="changePage($event);">
     </mat-paginator>
     </mat-card-footer>
   </mat-card>
 </div>
+
+<div *ngIf="searchDone && showNone"> Your query found no listings. Please try again. </div>
 <div *ngIf="!searchDone" class="margin-auto loader"></div>

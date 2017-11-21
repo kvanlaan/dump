@@ -19,6 +19,7 @@ import * as similarity from 'similarity';
 export class NavComponent implements OnInit {
   margin = 'margin-top-20';
   searchQuery: string;
+  showBadQuery = false;
   list: Array<Item> = [
     { label: 'clothing', value: 'clothing' },
     { label: 'pants', value: 'clothing' },
@@ -113,9 +114,18 @@ export class NavComponent implements OnInit {
   }
 
   filterQuery(event: any) {
-    const label = event.label;
-    this.margin = 'margin-top-1';
-    this.router.navigate(['home/search/', label]);
+    this.showBadQuery = false;
+    if (event !== undefined) {
+      const label = event.label;
+      this.margin = 'margin-top-1';
+      this.router.navigate(['home/search/', label]);
+    }
+  }
+  badQuery(event: any) {
+    const urlThree = new URL(window.location.href);
+    if (urlThree.href.indexOf('search') < -1) {
+      this.showBadQuery = true;
+    }
   }
 }
 

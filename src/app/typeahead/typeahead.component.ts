@@ -148,6 +148,7 @@ export class TypeaheadComponent implements OnInit, ControlValueAccessor {
    * Event that occurs when a suggestion is selected.
    */
   @Output() suggestionSelected = new EventEmitter<any>();
+  @Output() badQuery = new EventEmitter<any>();
 
   /**
    * Handle to the input element.
@@ -217,10 +218,15 @@ export class TypeaheadComponent implements OnInit, ControlValueAccessor {
       if (this.input && this.selectedSuggestion === undefined) {
         const suggestion = this.list.find(item => similarity(this.input, item.label) > 0.5) // change so it's the max
         if (suggestion !== undefined) {
+          console.log('suggestion', suggestion);
           this.suggestionSelected.emit(suggestion);
         } else {
+          console.log('emiting active', this.activeSuggestion);
           this.suggestionSelected.emit(this.activeSuggestion);
+          this.badQuery.emit(this.input);
         }
+      } else {
+        console.log('failed b', this.input, 'selected suggestion', this.selectedSuggestion);
       }
     }
   }

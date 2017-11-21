@@ -26,6 +26,7 @@ export class SearchComponent implements OnInit {
   query: string;
   yelpUrl = 'https://yelphubb.herokuapp.com/api/yelp';
   data: any;
+  showNone = false;
   list: Array<Item> = [
     { label: 'clothing', value: 'clothing' },
     { label: 'pants', value: 'clothing' },
@@ -150,6 +151,9 @@ export class SearchComponent implements OnInit {
       if (val.value !== 'landfill' && val.value !== 'Toy' && val.value !== 'clothing' && val.value !== 'food') {
         this.searchRecycling(val.label);
       }
+    } else {
+      this.showNone = true;
+      this.searchDone = true;
     }
   }
 

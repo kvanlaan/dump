@@ -18,7 +18,7 @@
             <div>{{listing.Phone}} </div>
             <div>{{listing.Address}}, {{listing.State}} </div>
             <button fxFlexAlign="center center" mat-button 
-            [routerLink]="['/map/', listing.Address]">Get Directions</button>
+            [routerLink]="['/map/', listing.Address + ','+ ',' + listing.State]">Get Directions</button>
           </mat-card-subtitle>
         </div>
    
