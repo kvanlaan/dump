@@ -97,7 +97,7 @@ export class NavComponent implements OnInit {
   }
 
   ngOnInit() {
-    const url = new URL(window.location.href);
+    let url = new URL(window.location.href);
     if (url.href.indexOf('search') > -1) {
       const urlArr = url.href.split('/home');
       const urlArrTwo = urlArr[1].split('/');
@@ -110,10 +110,9 @@ export class NavComponent implements OnInit {
     }
 
     this.router.events.subscribe(async (event: NavigationEnd) => {
-      console.log('this.label', this.label);
       if (event instanceof NavigationEnd) {
-        const urlTwo = new URL(window.location.href);
-        if (urlTwo.href.indexOf('search') > -1) {
+        url = new URL(window.location.href);
+        if (url.href.indexOf('search') > -1) {
           this.margin = 'margin-top-1';
         } else {
           this.margin = 'margin-top-20';
@@ -131,16 +130,14 @@ export class NavComponent implements OnInit {
     }
   }
   badQuery(event: any) {
-    const urlThree = new URL(window.location.href);
+   const url = new URL(window.location.href);
     this.badQueryString = event;
-    if (urlThree.href.indexOf('search') < 0) {
+    if (url.href.indexOf('search') < 0) {
       this.showBadQuery = true;
 
     } else {
       this.router.navigate(['home/search/' + this.label + '/bad/', event]);
     }
-
-
   }
 }
 

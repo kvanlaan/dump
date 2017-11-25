@@ -68,6 +68,9 @@ body {
 .height-100 {
     height: 100%;
 }
+.height-10 {
+    height: 10%;
+}
 a {
     color: #85D9BF;
 }
@@ -234,6 +237,9 @@ input {
 .padding-0{
   padding: 0px !important;
 }
+.padding-top-0{
+    padding-top: 0px !important;
+  }
 .padding-1{
   padding: 1px !important;
 }
@@ -292,6 +298,12 @@ md-spinner {
  color: white !important;
 }
 
+.italic {
+    font-style: italic;
+}
+.bold {
+    font-weight: bold;
+}
 .white {
     fill: white !important;
     color: white !important;

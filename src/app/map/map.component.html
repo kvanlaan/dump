@@ -1,5 +1,5 @@
-<mat-sidenav-container [style.opacity]="showing" class="example-container">
-  <mat-sidenav #sidenav fxLayout="column" class="example-sidenav" mode="side" opened="true">
+<mat-sidenav-container [style.opacity]="showing" class="container">
+  <mat-sidenav #sidenav fxLayout="column" class="sidenav" mode="side" opened="true">
     <div class="green white" style="height: 104px">
       <div fxLayout="row">
         <i class="material-icons pointer" (click)="goBack()" style="opacity: .75; width: 30px;">reply</i>
@@ -39,7 +39,7 @@
     </div>
   </mat-sidenav>
 
-  <div class="example-sidenav-content">
+  <div class="sidenav-content">
 
     <span [style.opacity]="showing">
         <!-- <button type="button" mat-button (click)="sidenav.toggle()">
