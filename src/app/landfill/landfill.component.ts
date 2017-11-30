@@ -9,6 +9,5 @@ export class LandfillComponent implements OnInit {
   @Input() list: any;
   constructor() { }
   ngOnInit() {
-    console.log('list', this.list);
-  }
+  } 
 }

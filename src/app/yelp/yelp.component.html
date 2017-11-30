@@ -20,7 +20,7 @@
             <mat-card-subtitle fxLayout="column"  fxLayoutAlign="center" fxFlex="100" style="font-size: 10px; margin: auto;">
             <div>{{listing.display_phone}} </div>
             <div>{{listing.location.address}}, {{listing.location.city}}, {{listing.location.state_code}} </div>
-            <button fxFlexAlign="end center" mat-button (click)="navigate(listing.Address)" [routerLink]="['map', listing.address]">Get Directions</button>
+            <button fxFlexAlign="end center" mat-button [routerLink]="['/map/', listing.location.address[0]]">Get Directions</button>
           </mat-card-subtitle>
         </div>
       </mat-card-header>

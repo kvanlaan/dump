@@ -27,6 +27,7 @@ export const TYPEAHEAD_CONTROL_VALUE_ACCESSOR: any = {
         (keyup)="inputKeyUp($event)"
         (keydown)="inputKeyDown($event)"
         (focus)="inputFocus($event)"
+        (offClick)="offClick($event)"
         (blur)="inputBlur($event)"
         [disabled]="isDisabled">
         <input style="visibility: hidden" matInput type="text"
@@ -227,6 +228,15 @@ export class TypeaheadComponent implements OnInit, ControlValueAccessor {
         this.suggestionSelected.emit(this.selectedSuggestion);
       }
     }
+  }
+
+    @HostListener('click', ['$event'])
+  toggle() {
+    console.log('toggling');
+    this.suggestions = this.list;
+      this.activeSuggestion = this.suggestions[0];
+      this.populateTypeahead();
+      this.areSuggestionsVisible = true;
   }
   public ngOnInit() {
   }
@@ -446,6 +456,10 @@ export class TypeaheadComponent implements OnInit, ControlValueAccessor {
       // Show/hide the suggestions
       this.areSuggestionsVisible = this.suggestions.length > 0;
     }
+  }
+
+  offClick() {
+     this.areSuggestionsVisible = false;
   }
 
   /**

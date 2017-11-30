@@ -120,13 +120,10 @@ export class SearchComponent implements OnInit {
           this.route.params.subscribe(params => {
             if (params['idTwo']) {
               this.badQuery = params['idTwo'];
-              console.log('this.badQuery', this.badQuery);
             }
             if (params['id'] !== this.label) {
               this.label = params['id'];
               this.search();
-            } else {
-              console.log('failed bc stupid');
             }
           });
         }

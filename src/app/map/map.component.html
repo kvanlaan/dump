@@ -1,6 +1,8 @@
 <mat-sidenav-container [style.opacity]="showing" class="container">
   <mat-sidenav #sidenav fxLayout="column" class="sidenav" mode="side" opened="true">
+
     <div class="green white" style="height: 104px">
+       
       <div fxLayout="row">
         <i class="material-icons pointer" (click)="goBack()" style="opacity: .75; width: 30px;">reply</i>
         <div fxFlexAlign="end" style="font-size: 13px; padding-right: 5px; width: 30px; color: rgba(255,255,255,0.45)"> <span> from</span></div>
@@ -40,13 +42,11 @@
   </mat-sidenav>
 
   <div class="sidenav-content">
-
     <span [style.opacity]="showing">
-        <!-- <button type="button" mat-button (click)="sidenav.toggle()">
-            Open sidenav
-          </button> -->
-      <agm-map [style.height.px]="mapHeight" [scrollwheel]="false"  [latitude]="lat" [longitude]="lng">
-        <directions #directionsList (directionsUpdate)="directionsUpdate()"></directions>
+          <div (click)="sidenav.toggle();" class="widget-pane-toggle-button"><i  [fxShow]="sidenav.opened" style="margin-top: 50%" class="margin-auto material-icons">keyboard_arrow_left</i> <i style="margin-top: 50%" [fxShow]="!sidenav.opened" class="margin-auto material-icons">keyboard_arrow_right</i></div>
+      <agm-map #agmMap style="margin-top: -48px !important" [style.height.px]="mapHeight" [scrollwheel]="false"  [latitude]="lat" [longitude]="lng">
+        <directions #directionsList (directionsUpdate)="directionsUpdate()">
+        </directions>
       </agm-map>
       </span>
   </div>

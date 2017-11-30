@@ -9,6 +9,7 @@ export class YelpComponent implements OnInit {
   @Input() list: any;
   constructor() { }
   ngOnInit() {
+    console.log('list', this.list);
   }
 
 }
