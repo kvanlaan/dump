@@ -27,7 +27,7 @@ export const TYPEAHEAD_CONTROL_VALUE_ACCESSOR: any = {
         (keyup)="inputKeyUp($event)"
         (keydown)="inputKeyDown($event)"
         (focus)="inputFocus($event)"
-        (offClick)="offClick($event)"
+        (offClick)="offClick()"
         (blur)="inputBlur($event)"
         [disabled]="isDisabled">
         <input style="visibility: hidden" matInput type="text"
