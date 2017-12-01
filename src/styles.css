@@ -230,6 +230,10 @@ input {
 .margin-top-1{
   margin-top: 1% !important;
 }
+
+.mat-expansion-panel-header[aria-disabled=true]{
+    color: rgba(0,0,0,.87) !important;
+}
 .mat-form-field-infix {
     border-top: 0px;
 }

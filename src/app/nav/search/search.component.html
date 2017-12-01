@@ -1,4 +1,5 @@
-<div *ngIf="searchDone" fxFlex.sm="95" fxFlex.md="80" fxFlex="68" class="margin-auto"> <mat-expansion-panel class="margin-auto" style="z-index: 3">
+<div *ngIf="searchDone" fxFlex.sm="95" fxFlex.md="80" fxFlex="68" class="margin-auto"> 
+  <mat-expansion-panel  [disabled]="true" class="margin-auto" style="z-index: 3">
     <mat-expansion-panel-header>
       <mat-panel-title fxLayout="row" fxFlex="100">
         Showing results for&nbsp;<span class="italic bold">{{query}}</span>&nbsp;nearest to your current location<span *ngIf="badQuery">.&nbsp;No listings for 
