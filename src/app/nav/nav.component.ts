@@ -36,7 +36,7 @@ export class NavComponent implements OnInit {
     { label: 'shorts', value: 'clothing' },
     { label: 'socks', value: 'clothing' },
     { label: 'underwear', value: 'dump' },
-    { label: 'misc clothing', value: 'clothing' },
+    { label: 'clothing', value: 'clothing' },
     { label: 'gloves', value: 'clothing' },
     { label: 'mittens', value: 'clothing' },
     { label: 'jeans', value: 'clothing' },
@@ -84,13 +84,13 @@ export class NavComponent implements OnInit {
     { label: 'car filters', value: 'filters' },
     { label: 'tires', value: 'tire' },
     { label: 'toy', value: 'toy' },
-    { label: 'trash', value: 'dump' },
-    { label: 'leftovers', value: 'dump' },
-    { label: 'animal', value: 'animal' },
-    { label: 'dead animal', value: 'animal' },
-    { label: 'body', value: 'body' },
-    { label: 'bodies', value: 'body' },
-    { label: 'dead bodies', value: 'body' }
+    { label: 'trash', value: 'dump' }
+    // { label: 'leftovers', value: 'dump' },
+    // { label: 'animal', value: 'animal' },
+    // { label: 'dead animal', value: 'animal' },
+    // { label: 'body', value: 'body' },
+    // { label: 'bodies', value: 'body' },
+    // { label: 'dead bodies', value: 'body' }
   ]
 
   constructor(private router: Router, private route: ActivatedRoute) {

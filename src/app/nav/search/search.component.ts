@@ -71,7 +71,7 @@ export class SearchComponent implements OnInit {
     { label: 'kitchen appliance', value: 'appliance' },
     { label: 'refrigerator', value: 'refrigerator' },
     { label: 'TV', value: 'television' },
-    { label: 'blender', value: 'television' },
+    { label: 'television', value: 'television' },
     { label: 'paper', value: 'paper' },
     { label: 'newspaper', value: 'paper' },
     { label: 'magazine', value: 'paper' },
@@ -106,27 +106,26 @@ export class SearchComponent implements OnInit {
       navigator.geolocation.getCurrentPosition((position: any) => {
         this.lat = Number(position.coords.latitude);
         this.lng = Number(position.coords.longitude);
-      })
-
-      this.route.params.subscribe(params => {
-        this.label = params['id'];
-        if (params['idTwo']) {
-          this.badQuery = params['idTwo'];
-        }
-        this.search();
-      });
-      this.router.events.subscribe(async (event: NavigationEnd) => {
-        if (event instanceof NavigationEnd) {
-          this.route.params.subscribe(params => {
-            if (params['idTwo']) {
-              this.badQuery = params['idTwo'];
-            }
-            if (params['id'] !== this.label) {
-              this.label = params['id'];
-              this.search();
-            }
-          });
-        }
+        this.route.params.subscribe(params => {
+          this.label = params['id'];
+          if (params['idTwo']) {
+            this.badQuery = params['idTwo'];
+          }
+          this.search();
+        });
+        this.router.events.subscribe(async (event: NavigationEnd) => {
+          if (event instanceof NavigationEnd) {
+            this.route.params.subscribe(params => {
+              if (params['idTwo']) {
+                this.badQuery = params['idTwo'];
+              }
+              if (params['id'] !== this.label) {
+                this.label = params['id'];
+                this.search();
+              }
+            });
+          }
+        })
       })
     }
   }
@@ -138,6 +137,7 @@ export class SearchComponent implements OnInit {
     this.landFillData = [];
     this.recycleData = [];
     this.finalData = [];
+    this.data = [];
     this.displayedData = [];
     this.searchDone = false;
     this.query = this.label;
@@ -204,9 +204,9 @@ export class SearchComponent implements OnInit {
         if (this.data) {
           for (let i = 0; i < this.data.length; i++) {
             const dataObject = this.data[i]
-            const categories = dataObject.Category
-            const materials = dataObject.Materials
-            if (materials.indexOf(query) > -1 || categories.indexOf(query) > -1) {
+            const categories = dataObject.Category.toLowerCase();
+            const materials = dataObject.Materials.toLowerCase();
+            if (materials.indexOf(query.toLowerCase()) > -1 || categories.indexOf(query.toLowerCase()) > -1) {
               this.recycleData.push(dataObject)
             }
           }
