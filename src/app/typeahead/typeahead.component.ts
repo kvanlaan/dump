@@ -14,7 +14,7 @@ export const TYPEAHEAD_CONTROL_VALUE_ACCESSOR: any = {
 @Component({
   selector: 'typeahead',
   template: `
-    <div fxFlex="14.5" class="margin-auto typeahead">
+    <div class="margin-auto typeahead">
     <mat-input-container class="white">
       <input matInput  #inputElement
         placeholder="What do you need to dump?"
@@ -60,7 +60,7 @@ export const TYPEAHEAD_CONTROL_VALUE_ACCESSOR: any = {
   }
     .typeahead {
       position: relative;
-      width: 100%;
+      width: 200px;
       text-align: center;
       vertical-align: top;
 
@@ -93,7 +93,7 @@ export const TYPEAHEAD_CONTROL_VALUE_ACCESSOR: any = {
       border-radius: 3px;
       padding: 0;
       background-color: #f5f5f5;
-      width: 106%;
+      width: 100%;
       max-height: 18em !important;
       border: 1px solid #e0e0e0;
       z-index: 100;
@@ -230,14 +230,14 @@ export class TypeaheadComponent implements OnInit, ControlValueAccessor {
     }
   }
 
-    @HostListener('click', ['$event'])
-  toggle() {
-    console.log('toggling');
-    this.suggestions = this.list;
-      this.activeSuggestion = this.suggestions[0];
-      this.populateTypeahead();
-      this.areSuggestionsVisible = true;
-  }
+  //   @HostListener('click', ['$event'])
+  // toggle() {
+  //   console.log('toggling');
+  //   this.suggestions = this.list;
+  //     this.activeSuggestion = this.suggestions[0];
+  //     this.populateTypeahead();
+  //     this.areSuggestionsVisible = true;
+  // }
   public ngOnInit() {
   }
 
@@ -437,25 +437,33 @@ export class TypeaheadComponent implements OnInit, ControlValueAccessor {
    * Called when a focus event is fired on the input element.
    */
   public inputFocus(event: FocusEvent) {
-    // If the element is receiving focus and it has a selection, then
-    // clear the selection. This helps prevent partial editing
-    if (this.selectedSuggestion != null) {
-      this.selectSuggestion(null);
-      this.input = '';
+    // console.log('focusing');
+    // // If the element is receiving focus and it has a selection, then
+    // // clear the selection. This helps prevent partial editing
+    // if (this.selectedSuggestion != null) {
+    //   this.selectSuggestion(null);
+    //   this.input = '';
+    //   this.populateTypeahead();
+    // }
+
+    // // Re-populate the suggestions
+    // this.populateSuggestions();
+
+    // // If we have suggestions
+    // if (this.suggestions.length > 0) {
+    //   // Set the typeahead to a slice of the first suggestion
+    //   this.populateTypeahead();
+
+    //   // Show/hide the suggestions
+    //   this.areSuggestionsVisible = this.suggestions.length > 0;
+    // }
+
+
+    //   console.log('toggling');
+    this.suggestions = this.list;
+      this.activeSuggestion = this.suggestions[0];
       this.populateTypeahead();
-    }
-
-    // Re-populate the suggestions
-    this.populateSuggestions();
-
-    // If we have suggestions
-    if (this.suggestions.length > 0) {
-      // Set the typeahead to a slice of the first suggestion
-      this.populateTypeahead();
-
-      // Show/hide the suggestions
-      this.areSuggestionsVisible = this.suggestions.length > 0;
-    }
+      this.areSuggestionsVisible = true;
   }
 
   offClick() {

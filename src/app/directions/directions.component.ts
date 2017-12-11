@@ -26,11 +26,9 @@ export class DirectionsComponent {
     }
     let directions: any;
     this.gmapsApi.getNativeMap().then((map: any) => {
-      console.log('map', map);
 
       this.directionsDisplay.setDirections({ routes: [] });
       this.directionsDisplay.setMap(map);
-      console.log('directionsDisplay', this.directionsDisplay);
       this.directionsService.route({
         origin: origin,
         destination: destination,
@@ -38,7 +36,6 @@ export class DirectionsComponent {
         optimizeWaypoints: true,
         travelMode: 'DRIVING'
       }, function (this: DirectionsComponent, response: any, status: any) {
-        console.log('status', status);
         if (status === 'OK') {
           this.directionsDisplay.setDirections(response);
 

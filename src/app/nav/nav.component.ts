@@ -35,7 +35,7 @@ export class NavComponent implements OnInit {
     { label: 'blouse', value: 'clothing' },
     { label: 'shorts', value: 'clothing' },
     { label: 'socks', value: 'clothing' },
-    { label: 'underwear', value: 'dump' },
+    // { label: 'underwear', value: 'dump' },
     { label: 'clothing', value: 'clothing' },
     { label: 'gloves', value: 'clothing' },
     { label: 'mittens', value: 'clothing' },

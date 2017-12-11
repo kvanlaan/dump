@@ -144,7 +144,6 @@ export class SearchComponent implements OnInit {
     const val = this.list.find(listItem => listItem.label === this.label);
     if (val) {
       if (val.value === 'clothing') {
-        console.log('searching yelp');
         this.searchYelp('clothing');
       }
       if (val.value === 'toy') {
