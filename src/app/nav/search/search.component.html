@@ -1,4 +1,4 @@
-<div *ngIf="searchDone" fxFlex.sm="95" fxFlex.md="80" fxFlex="68" class="margin-auto"> 
+<div *ngIf="searchDone && !showDump" fxFlex.sm="95" fxFlex.md="80" fxFlex="68" class="margin-auto"> 
   <mat-expansion-panel  [disabled]="true" class="margin-auto z-index-3">
     <mat-expansion-panel-header>
       <mat-panel-title fxLayout="row" fxFlex="100">
@@ -18,6 +18,10 @@
     </mat-paginator>
     </mat-card-footer>
   </mat-card>
+</div>
+
+<div *ngIf="searchDone && showDump" fxFlex.sm="95" fxFlex.md="80" fxFlex="68" class="height-100 margin-auto white"> 
+  dump it
 </div>
 
 <div *ngIf="!searchDone" class="margin-auto loader"></div>

@@ -21,6 +21,7 @@ import { LandfillComponent } from './landfill/landfill.component';
 import { RecyclingComponent } from './recycling/recycling.component';
 import { SearchComponent } from './nav/search/search.component';
 import {MatAutocompleteModule} from '@angular/material';
+import { DumpComponent } from './dump/dump.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +33,8 @@ import {MatAutocompleteModule} from '@angular/material';
     LandfillComponent,
     GoogleplaceDirective,
     RecyclingComponent,
-    SearchComponent],
+    SearchComponent,
+    DumpComponent],
 
 
   imports: [

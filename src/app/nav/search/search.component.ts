@@ -23,6 +23,7 @@ export class SearchComponent implements OnInit {
   badQuery = '';
   showYelp = false;
   showRecycling = false;
+  showDump = false;
   showLandfill = false;
   query: string;
   yelpUrl = 'https://yelphubb.herokuapp.com/api/yelp';
@@ -133,6 +134,7 @@ export class SearchComponent implements OnInit {
     this.showLandfill = false;
     this.showRecycling = false;
     this.showYelp = false;
+    this.showDump = false;
     this.yelpData = [];
     this.landFillData = [];
     this.recycleData = [];
@@ -156,11 +158,17 @@ export class SearchComponent implements OnInit {
       if (val.value === 'landfill') {
         this.searchLandFills(val.label);
       }
-      if (val.value !== 'landfill' && val.value !== 'Toy' && val.value !== 'clothing' && val.value !== 'food') {
+
+      if (val.value === 'dump') {
+        this.showDump = true;
+        this.searchDone = true;
+      }
+      if (val.value !== 'dump' && val.value !== 'landfill' && val.value !== 'Toy' && val.value !== 'clothing' && val.value !== 'food') {
         this.searchRecycling(val.label);
       }
     } else {
-      this.showNone = true;
+      console.log('here');
+      this.showDump = true;
       this.searchDone = true;
     }
   }
