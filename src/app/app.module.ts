@@ -6,7 +6,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { NavComponent } from './nav/nav.component';
+import { NavComponent, DialogContentExampleDialogComponent } from './nav/nav.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -14,13 +14,17 @@ import { MapComponent } from './map/map.component';
 import { DirectionsComponent } from 'app/directions/directions.component';
 import { TypeaheadComponent } from './typeahead/typeahead.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatExpansionModule, MatButtonModule, MatInputModule,
-  MatPaginatorModule, MatCardModule, MatProgressSpinnerModule, MatCheckboxModule, MatSidenavModule } from '@angular/material';
+import {
+  MatExpansionModule, MatButtonModule, MatInputModule,
+  MatPaginatorModule, MatCardModule, MatProgressSpinnerModule, MatCheckboxModule, MatSidenavModule,
+  MatDialog
+} from '@angular/material';
 import { YelpComponent } from './yelp/yelp.component';
 import { LandfillComponent } from './landfill/landfill.component';
 import { RecyclingComponent } from './recycling/recycling.component';
 import { SearchComponent } from './nav/search/search.component';
-import {MatAutocompleteModule} from '@angular/material';
+import { MatAutocompleteModule } from '@angular/material';
+import { MatDialogModule } from '@angular/material';
 import { DumpComponent } from './dump/dump.component';
 @NgModule({
   declarations: [
@@ -34,8 +38,11 @@ import { DumpComponent } from './dump/dump.component';
     GoogleplaceDirective,
     RecyclingComponent,
     SearchComponent,
+    DialogContentExampleDialogComponent,
     DumpComponent],
-
+  entryComponents: [
+    DialogContentExampleDialogComponent
+  ],
 
   imports: [
     BrowserModule,
@@ -43,8 +50,8 @@ import { DumpComponent } from './dump/dump.component';
     MatInputModule,
     FormsModule,
     MatAutocompleteModule,
-    MatSidenavModule, MatExpansionModule,
-    MatButtonModule, MatPaginatorModule, MatProgressSpinnerModule,  MatCheckboxModule, MatCardModule,
+    MatDialogModule, MatSidenavModule, MatExpansionModule,
+    MatButtonModule, MatPaginatorModule, MatProgressSpinnerModule, MatCheckboxModule, MatCardModule,
     ReactiveFormsModule,
     HttpModule,
     NgxPaginationModule,

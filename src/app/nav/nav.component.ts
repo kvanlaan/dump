@@ -4,22 +4,32 @@ import { RecyclingComponent } from './../recycling/recycling.component';
 import { Component, OnInit, ViewChild, ElementRef, HostListener, AfterViewInit } from '@angular/core';
 import { Router, RouterOutlet, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { Item } from './item.model';
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import { FormControl } from '@angular/forms';
 import * as similarity from 'similarity';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
+@Component({
+  templateUrl: './info.component.html'
+})
+
+export class DialogContentExampleDialogComponent {
+
+}
 @Component({
   selector: 'app-nav-component',
-  templateUrl: './nav.component.html'
+  templateUrl: './nav.component.html',
+  entryComponents: [DialogContentExampleDialogComponent]
 })
 
 export class NavComponent implements OnInit {
   margin = 'margin-top-20';
   searchQuery: string;
   badQueryString = '';
+  showInfoBox = false;
   label = '';
   showBadQuery = false;
   showFancyBadQuery = false;
@@ -92,8 +102,20 @@ export class NavComponent implements OnInit {
     // { label: 'bodies', value: 'body' },
     // { label: 'dead bodies', value: 'body' }
   ]
+  animal: string;
+  name: string;
+  constructor(private router: Router, private route: ActivatedRoute, public dialog: MatDialog) {
 
-  constructor(private router: Router, private route: ActivatedRoute) {
+  }
+
+  openDialog() {
+    const dialogRef = this.dialog.open(DialogContentExampleDialogComponent, {
+      width: '450px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 
   ngOnInit() {
@@ -107,6 +129,7 @@ export class NavComponent implements OnInit {
       this.margin = 'margin-top-1';
     } else {
       this.margin = 'margin-top-20';
+      this.openDialog();
     }
 
     this.router.events.subscribe(async (event: NavigationEnd) => {
@@ -129,8 +152,11 @@ export class NavComponent implements OnInit {
       this.router.navigate(['home/search/', this.label]);
     }
   }
+  toggleInfoBox() {
+    this.showInfoBox = !this.showInfoBox;
+  }
   badQuery(event: any) {
-   const url = new URL(window.location.href);
+    const url = new URL(window.location.href);
     this.badQueryString = event;
     if (url.href.indexOf('search') < 0) {
       this.showBadQuery = true;
@@ -140,4 +166,3 @@ export class NavComponent implements OnInit {
     }
   }
 }
-
