@@ -461,13 +461,13 @@ export class TypeaheadComponent implements OnInit, ControlValueAccessor {
 
     //   console.log('toggling');
     this.suggestions = this.list;
-      this.activeSuggestion = this.suggestions[0];
-      this.populateTypeahead();
-      this.areSuggestionsVisible = true;
+    this.activeSuggestion = this.suggestions[0];
+    this.populateTypeahead();
+    this.areSuggestionsVisible = true;
   }
 
   offClick() {
-     this.areSuggestionsVisible = false;
+    this.areSuggestionsVisible = false;
   }
 
   /**

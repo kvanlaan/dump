@@ -30,26 +30,9 @@ export class SearchComponent implements OnInit {
   data: any;
   showNone = false;
   list: Array<Item> = [
-    { label: 'clothing', value: 'clothing' },
-    { label: 'pants', value: 'clothing' },
-    { label: 'scarf', value: 'clothing' },
-    { label: 'shoes', value: 'clothing' },
-    { label: 'boots', value: 'clothing' },
-    { label: 'watch', value: 'clothing' },
-    { label: 'tshirt', value: 'clothing' },
-    { label: 'jewelry', value: 'clothing' },
-    { label: 'blouse', value: 'clothing' },
-    { label: 'shorts', value: 'clothing' },
-    { label: 'socks', value: 'clothing' },
-    { label: 'underwear', value: 'dump' },
-    { label: 'misc clothing', value: 'clothing' },
-    { label: 'gloves', value: 'clothing' },
-    { label: 'mittens', value: 'clothing' },
-    { label: 'jeans', value: 'clothing' },
-    { label: 'blanket', value: 'clothing' },
-    { label: 'can', value: 'can' },
     { label: 'steel can', value: 'steel' },
     { label: 'aluminum can', value: 'can' },
+    { label: 'tin can', value: 'tin' },
     { label: 'plastic', value: 'plastic' },
     { label: 'battery', value: 'batteries' },
     { label: 'batteries', value: 'batteries' },
@@ -72,7 +55,8 @@ export class SearchComponent implements OnInit {
     { label: 'kitchen appliance', value: 'appliance' },
     { label: 'refrigerator', value: 'refrigerator' },
     { label: 'TV', value: 'television' },
-    { label: 'television', value: 'television' },
+    { label: 'television', value: 'tv' },
+    { label: 'blender', value: 'appliance' },
     { label: 'paper', value: 'paper' },
     { label: 'newspaper', value: 'paper' },
     { label: 'magazine', value: 'paper' },
@@ -89,14 +73,30 @@ export class SearchComponent implements OnInit {
     { label: 'motor oil', value: 'oil' },
     { label: 'car filters', value: 'filters' },
     { label: 'tires', value: 'tire' },
+    { label: 'clothing', value: 'clothing' },
+    { label: 'pants', value: 'clothing' },
+    { label: 'scarf', value: 'clothing' },
+    { label: 'shoes', value: 'clothing' },
+    { label: 'boots', value: 'clothing' },
+    { label: 'watch', value: 'clothing' },
+    { label: 'tshirt', value: 'clothing' },
+    { label: 'jewelry', value: 'clothing' },
+    { label: 'blouse', value: 'clothing' },
+    { label: 'shorts', value: 'clothing' },
+    { label: 'socks', value: 'clothing' },
+    { label: 'gloves', value: 'clothing' },
+    { label: 'mittens', value: 'clothing' },
+    { label: 'jeans', value: 'clothing' },
+    { label: 'blanket', value: 'clothing' },
+    { label: 'can', value: 'can' },
     { label: 'toy', value: 'toy' },
-    { label: 'trash', value: 'dump' },
-    { label: 'leftovers', value: 'dump' },
-    { label: 'animal', value: 'animal' },
-    { label: 'dead animal', value: 'animal' },
-    { label: 'body', value: 'body' },
-    { label: 'bodies', value: 'body' },
-    { label: 'dead bodies', value: 'body' }
+    { label: 'trash', value: 'dump' }
+    // { label: 'leftovers', value: 'dump' },
+    // { label: 'animal', value: 'animal' },
+    // { label: 'dead animal', value: 'animal' },
+    // { label: 'body', value: 'body' },
+    // { label: 'bodies', value: 'body' },
+    // { label: 'dead bodies', value: 'body' }
   ]
   lat;
   lng;
@@ -144,32 +144,26 @@ export class SearchComponent implements OnInit {
     this.searchDone = false;
     this.query = this.label;
     const val = this.list.find(listItem => listItem.label === this.label);
-    if (val) {
-      if (val.value === 'clothing') {
+    switch (val.value) {
+      case 'clothing':
         this.searchYelp('clothing');
-      }
-      if (val.value === 'toy') {
+        break;
+      case 'toy':
         this.searchYelp('Toy');
-      }
-      if (val.value === 'food') {
+        break;
+      case 'food':
         this.searchYelp('Food');
-      }
-
-      if (val.value === 'landfill') {
+        break;
+      case 'landfill':
         this.searchLandFills(val.label);
-      }
-
-      if (val.value === 'dump') {
+        break;
+      case 'dump':
         this.showDump = true;
         this.searchDone = true;
-      }
-      if (val.value !== 'dump' && val.value !== 'landfill' && val.value !== 'Toy' && val.value !== 'clothing' && val.value !== 'food') {
-        this.searchRecycling(val.label);
-      }
-    } else {
-      console.log('here');
-      this.showDump = true;
-      this.searchDone = true;
+        break;
+      default:
+        this.searchRecycling(val);
+        break;
     }
   }
 
@@ -200,7 +194,7 @@ export class SearchComponent implements OnInit {
       );
   }
 
-  searchRecycling(query: string) {
+  searchRecycling(query: Item) {
     this.showRecycling = true;
     this.http.get('assets/recyclingCenters.json')
       .map(res => res.json())
@@ -213,7 +207,10 @@ export class SearchComponent implements OnInit {
             const dataObject = this.data[i]
             const categories = dataObject.Category.toLowerCase();
             const materials = dataObject.Materials.toLowerCase();
-            if (materials.indexOf(query.toLowerCase()) > -1 || categories.indexOf(query.toLowerCase()) > -1) {
+            if (materials.indexOf(query.label.toLowerCase()) > -1 || categories.indexOf(query.label.toLowerCase()) > -1) {
+              this.recycleData.push(dataObject)
+            }
+            if (materials.indexOf(query.value.toLowerCase()) > -1 || categories.indexOf(query.value.toLowerCase()) > -1) {
               this.recycleData.push(dataObject)
             }
           }

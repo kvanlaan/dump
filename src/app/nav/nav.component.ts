@@ -34,28 +34,11 @@ export class NavComponent implements OnInit {
   showBadQuery = false;
   showFancyBadQuery = false;
   list: Array<Item> = [
-    { label: 'clothing', value: 'clothing' },
-    { label: 'pants', value: 'clothing' },
-    { label: 'scarf', value: 'clothing' },
-    { label: 'shoes', value: 'clothing' },
-    { label: 'boots', value: 'clothing' },
-    { label: 'watch', value: 'clothing' },
-    { label: 'tshirt', value: 'clothing' },
-    { label: 'jewelry', value: 'clothing' },
-    { label: 'blouse', value: 'clothing' },
-    { label: 'shorts', value: 'clothing' },
-    { label: 'socks', value: 'clothing' },
-    // { label: 'underwear', value: 'dump' },
-    { label: 'clothing', value: 'clothing' },
-    { label: 'gloves', value: 'clothing' },
-    { label: 'mittens', value: 'clothing' },
-    { label: 'jeans', value: 'clothing' },
-    { label: 'blanket', value: 'clothing' },
-    { label: 'can', value: 'can' },
     { label: 'steel can', value: 'steel' },
     { label: 'aluminum can', value: 'can' },
+    { label: 'tin can', value: 'tin' },
     { label: 'plastic', value: 'plastic' },
-    { label: 'battery', value: 'batteries' },
+    { label: 'battery', value: 'batteries' }, // make thing look for value if search does not return label
     { label: 'batteries', value: 'batteries' },
     { label: 'paints', value: 'paint' },
     { label: 'paint', value: 'paint' },
@@ -76,7 +59,8 @@ export class NavComponent implements OnInit {
     { label: 'kitchen appliance', value: 'appliance' },
     { label: 'refrigerator', value: 'refrigerator' },
     { label: 'TV', value: 'television' },
-    { label: 'blender', value: 'television' },
+    { label: 'television', value: 'tv' },
+    { label: 'blender', value: 'appliance' },
     { label: 'paper', value: 'paper' },
     { label: 'newspaper', value: 'paper' },
     { label: 'magazine', value: 'paper' },
@@ -93,6 +77,22 @@ export class NavComponent implements OnInit {
     { label: 'motor oil', value: 'oil' },
     { label: 'car filters', value: 'filters' },
     { label: 'tires', value: 'tire' },
+    { label: 'clothing', value: 'clothing' },
+    { label: 'pants', value: 'clothing' },
+    { label: 'scarf', value: 'clothing' },
+    { label: 'shoes', value: 'clothing' },
+    { label: 'boots', value: 'clothing' },
+    { label: 'watch', value: 'clothing' },
+    { label: 'tshirt', value: 'clothing' },
+    { label: 'jewelry', value: 'clothing' },
+    { label: 'blouse', value: 'clothing' },
+    { label: 'shorts', value: 'clothing' },
+    { label: 'socks', value: 'clothing' },
+    { label: 'gloves', value: 'clothing' },
+    { label: 'mittens', value: 'clothing' },
+    { label: 'jeans', value: 'clothing' },
+    { label: 'blanket', value: 'clothing' },
+    { label: 'can', value: 'can' },
     { label: 'toy', value: 'toy' },
     { label: 'trash', value: 'dump' }
     // { label: 'leftovers', value: 'dump' },
@@ -102,8 +102,7 @@ export class NavComponent implements OnInit {
     // { label: 'bodies', value: 'body' },
     // { label: 'dead bodies', value: 'body' }
   ]
-  animal: string;
-  name: string;
+
   constructor(private router: Router, private route: ActivatedRoute, public dialog: MatDialog) {
 
   }
