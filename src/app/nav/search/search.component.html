@@ -1,18 +1,17 @@
-<div *ngIf="searchDone && !showDump" fxFlex.sm="95" fxFlex.md="80" fxFlex="68" class="margin-auto"> 
+<div *ngIf="searchDone && !showDump" fxFlex.xs="100" fxFlex.sm="95" fxFlex.md="80" fxFlex="68" class="margin-auto"> 
   <mat-expansion-panel  [disabled]="true" class="margin-auto z-index-3">
     <mat-expansion-panel-header>
       <mat-panel-title fxLayout="row" fxFlex="100">
-        Showing results for&nbsp;<span class="italic bold">{{query}}</span>&nbsp;nearest to your current location<span *ngIf="badQuery">.&nbsp;No listings for 
+        Showing results for&nbsp;<span class="italic bold">{{query}}</span><span [fxShow.xs]="false">&nbsp;nearest to your current location</span><span *ngIf="badQuery">.&nbsp;No listings for 
             <span class="italic bold">{{badQuery}}.</span>
-           </span> <span fxFlex fxLayoutAlign="end"> Showing 1- <span *ngIf="this.finalData.length < 10"> {{this.finalData.length}}</span><span *ngIf="this.finalData.length >= 10">{{pageSize}}</span>&nbsp; of {{this.finalData.length}} </span>
+           </span> <span fxFlex fxLayoutAlign="end"> Showing 1- <span *ngIf="this.finalData.length < 10">{{this.finalData.length}}</span><span *ngIf="this.finalData.length >= 10">{{pageSize}}</span>&nbsp; of {{this.finalData.length}} </span>
       </mat-panel-title>
     </mat-expansion-panel-header>
   </mat-expansion-panel>
 <mat-card class="border-top padding-top-0 yellow-background margin-auto text-align-center overflow-scroll">
     <app-recycling *ngIf="showRecycling" [list]="displayedData"></app-recycling>
     <app-landfill *ngIf="showLandfill" [list]="displayedData"></app-landfill>
-    <app-yelp  *ngIf="showYelp"  [list]="displayedData"></app-yelp>
-
+    <app-yelp *ngIf="showYelp" [list]="displayedData"></app-yelp>
     <mat-card-footer>
       <mat-paginator *ngIf="searchDone" [ngClass]="{'noNav': this.pages === 1}" [length]="finalData.length" [pageSize]="pageSize"  (page)="changePage($event);">
     </mat-paginator>

@@ -399,6 +399,7 @@ md-spinner {
 img {
    width: 150px;
    height: 100px;
+   min-width: 100px !important;
 }
 
 .mat-form-field-underline { 
@@ -413,6 +414,18 @@ img {
   
 @media only screen and (max-width: 900px) {
 
+}
+
+@media (max-width: 600px) {
+.mat-card-header {
+    margin: 0 0 0 0 !important;
+}
+.mat-card {
+    padding-left: 0px !important;
+}
+.mat-card-subtitle {
+    margin-top: 0px !important;
+}
 }
 
 @media only screen and (max-width: 640px) {
