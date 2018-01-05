@@ -1,6 +1,6 @@
     <div fxLayout="row" class="padding-2 border-bottom" *ngFor="let listing of list">
         <mat-card-header fxFlex="100">
-            <div fxFlex class="border-right padding-left-5 padding-right-5">
+            <div fxFlex class="padding-left-5 padding-right-5 border-right">
                 <img src="https://maps.googleapis.com/maps/api/streetview?size=600x300&location={{listing.location.coordinate.latitude}},{{listing.location.coordinate.longitude}}&heading=151.78&pitch=-0.76&key=AIzaSyA_JKefOG1BM8rJZoLt7p6OCEdnwPtjiWM"
               />
               </div>
@@ -16,7 +16,7 @@
             <strong *ngIf="listing.is_closed"> Now Closed </strong> </div>
           </mat-card-subtitle>
         </div>
-        <div fxFlex="20" fxLayout="column"  class="padding-left-5">
+        <div fxFlex="20" fxLayout="column" class="padding-left-5">
             <mat-card-subtitle fxLayout="column"  fxLayoutAlign="center" fxFlex="100" class="font-10 margin-auto">
             <div>{{listing.display_phone}} </div>
             <div>{{listing.location.address}} </div>
