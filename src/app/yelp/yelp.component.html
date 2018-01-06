@@ -3,6 +3,16 @@
             <div fxFlex class="padding-left-5 padding-right-5 border-right">
                 <img src="https://maps.googleapis.com/maps/api/streetview?size=600x300&location={{listing.location.coordinate.latitude}},{{listing.location.coordinate.longitude}}&heading=151.78&pitch=-0.76&key=AIzaSyA_JKefOG1BM8rJZoLt7p6OCEdnwPtjiWM"
               />
+
+              <div fxShow="false" [fxShow.xs]="true" fxLayout="column" class="margin-top-5 padding-left-5">
+                <mat-card-subtitle fxLayout="column"  fxLayoutAlign="end" fxFlex="100" class="font-10 margin-auto">
+                <div>{{listing.display_phone}} </div>
+                <div>{{listing.location.address}} </div>
+                <div>{{listing.location.city}}, {{listing.location.state_code}} </div>
+                
+                <button fxFlexAlign="end center" mat-button [routerLink]="['/map/', listing.location.address[0]]">Get Directions</button>
+              </mat-card-subtitle>
+            </div>
               </div>
           <div class="text-align-left border-right padding-left-5" fxFlex="60" fxLayout="column">
           <mat-card-title fxFlex="10"> {{listing.name}}           
@@ -16,7 +26,7 @@
             <strong *ngIf="listing.is_closed"> Now Closed </strong> </div>
           </mat-card-subtitle>
         </div>
-        <div fxFlex="20" fxLayout="column" class="padding-left-5">
+        <div [fxShow.xs]="false"  fxFlex="20" fxLayout="column" class="padding-left-5">
             <mat-card-subtitle fxLayout="column"  fxLayoutAlign="center" fxFlex="100" class="font-10 margin-auto">
             <div>{{listing.display_phone}} </div>
             <div>{{listing.location.address}} </div>
