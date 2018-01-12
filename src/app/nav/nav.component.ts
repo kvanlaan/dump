@@ -107,6 +107,8 @@ export class NavComponent implements OnInit {
 
   }
 
+  // key for google places api AIzaSyCgLu0hpZUwRVjFXlG8OUHd9JvKCV12vvY
+
   openDialog() {
     const dialogRef = this.dialog.open(DialogContentExampleDialogComponent, {
       width: '450px'
