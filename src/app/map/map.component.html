@@ -1,7 +1,7 @@
 <mat-sidenav-container [style.opacity]="showing" class="container">
   <mat-sidenav #sidenav fxLayout="column" class="sidenav" mode="side" opened="true">
 
-    <div class="green white" style="height: 104px">
+    <div class="green-background white" style="height: 104px">
        
       <div fxLayout="row">
         <i class="material-icons pointer" (click)="goBack()" style="opacity: .75; width: 30px;">reply</i>
@@ -52,6 +52,6 @@
   </div>
 </mat-sidenav-container>
 
-<div *ngIf="!ready" class="height-100">
+<div *ngIf="!ready">
   <div class="margin-auto loader"></div>
 </div>

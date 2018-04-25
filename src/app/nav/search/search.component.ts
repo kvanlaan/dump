@@ -3,6 +3,7 @@ import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { Http } from '@angular/http';
 import { Component, OnInit, Input, HostListener } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
+import { PositionService } from '../../position.service';
 declare var google: any;
 @Component({
   selector: 'app-search',
@@ -29,6 +30,7 @@ export class SearchComponent implements OnInit {
   yelpUrl = 'https://yelphubb.herokuapp.com/api/yelp';
   data: any;
   showNone = false;
+  positionValid = false;
   list: Array<Item> = [
     { label: 'steel can', value: 'steel' },
     { label: 'aluminum can', value: 'can' },
@@ -100,35 +102,37 @@ export class SearchComponent implements OnInit {
   ]
   lat;
   lng;
-  constructor(private http: Http, private router: Router, private route: ActivatedRoute) { }
+  constructor(private positionService: PositionService, private http: Http, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position: any) => {
-        this.lat = Number(position.coords.latitude);
-        this.lng = Number(position.coords.longitude);
+    const position = this.positionService.getPosition();
+    if (position !== undefined && position !== null) {
+      this.positionValid = true;
+      this.lat = position.lat;
+      this.lng = position.lon;
+    } else {
+      this.positionValid = false;
+    }
+    this.route.params.subscribe(params => {
+      this.label = params['id'];
+      if (params['idTwo']) {
+        this.badQuery = params['idTwo'];
+      }
+      this.search();
+    });
+    this.router.events.subscribe(async (event: NavigationEnd) => {
+      if (event instanceof NavigationEnd) {
         this.route.params.subscribe(params => {
-          this.label = params['id'];
           if (params['idTwo']) {
             this.badQuery = params['idTwo'];
           }
-          this.search();
-        });
-        this.router.events.subscribe(async (event: NavigationEnd) => {
-          if (event instanceof NavigationEnd) {
-            this.route.params.subscribe(params => {
-              if (params['idTwo']) {
-                this.badQuery = params['idTwo'];
-              }
-              if (params['id'] !== this.label) {
-                this.label = params['id'];
-                this.search();
-              }
-            });
+          if (params['id'] !== this.label) {
+            this.label = params['id'];
+            this.search();
           }
-        })
-      })
-    }
+        });
+      }
+    })
   }
   search() {
     this.showLandfill = false;
@@ -177,20 +181,22 @@ export class SearchComponent implements OnInit {
     this.http.get(this.yelpUrl)
       .map(res => res.json())
       .subscribe(
-      data => this.data = data,
-      err => console.log(err),
-      () => {
-        if (this.data) {
-          for (let i = 0; i < this.data.businesses.length; i++) {
-            const dataObject = this.data.businesses[i]
-            this.yelpData.push(dataObject)
+        data => this.data = data,
+        err => console.log(err),
+        () => {
+          if (this.data) {
+            for (let i = 0; i < this.data.businesses.length; i++) {
+              const dataObject = this.data.businesses[i]
+              this.yelpData.push(dataObject)
+            }
+            if (this.positionValid) {
+              this.yelpData = this.findMinYelp(this.yelpData);
+            }
+            this.setPages(this.yelpData);
+            this.showYelp = true;
+            this.searchDone = true
           }
-          this.yelpData = this.findMinYelp(this.yelpData);
-          this.setPages(this.yelpData);
-          this.showYelp = true;
-          this.searchDone = true
         }
-      }
       );
   }
 
@@ -199,30 +205,30 @@ export class SearchComponent implements OnInit {
     this.http.get('assets/recyclingCenters.json')
       .map(res => res.json())
       .subscribe(
-      data => this.data = data,
-      err => console.log(err),
-      () => {
-        if (this.data) {
-          for (let i = 0; i < this.data.length; i++) {
-            const dataObject = this.data[i]
-            const categories = dataObject.Category.toLowerCase();
-            const materials = dataObject.Materials.toLowerCase();
-            if (materials.indexOf(query.label.toLowerCase()) > -1 || categories.indexOf(query.label.toLowerCase()) > -1) {
-              this.recycleData.push(dataObject)
+        data => this.data = data,
+        err => console.log(err),
+        () => {
+          if (this.data) {
+            for (let i = 0; i < this.data.length; i++) {
+              const dataObject = this.data[i]
+              const categories = dataObject.Category.toLowerCase();
+              const materials = dataObject.Materials.toLowerCase();
+              if (materials.indexOf(query.label.toLowerCase()) > -1 || categories.indexOf(query.label.toLowerCase()) > -1) {
+                this.recycleData.push(dataObject)
+              }
             }
-            if (materials.indexOf(query.value.toLowerCase()) > -1 || categories.indexOf(query.value.toLowerCase()) > -1) {
-              this.recycleData.push(dataObject)
+            // code for sorting
+            if (this.positionValid) {
+            this.recycleData = this.findMin(this.recycleData);
             }
+            this.setPages(this.recycleData);
+            this.showRecycling = true;
+            this.searchDone = true
           }
-          // code for sorting
-          this.recycleData = this.findMin(this.recycleData);
-          this.setPages(this.recycleData);
-          this.showRecycling = true;
-          this.searchDone = true
         }
-      }
       );
   }
+
   findMinLandfill(resultsArr) {
     const objArr = []
     for (let i = 0; i < resultsArr.length; i++) {
@@ -289,20 +295,22 @@ export class SearchComponent implements OnInit {
     this.http.get('assets/landfills.json')
       .map(res => res.json())
       .subscribe(
-      data => this.data = data,
-      err => console.log(err),
-      () => {
-        if (this.data) {
-          for (let i = 0; i < this.data.length; i++) {
-            const dataObject = this.data[i]
-            this.landFillData.push(dataObject)
+        data => this.data = data,
+        err => console.log(err),
+        () => {
+          if (this.data) {
+            for (let i = 0; i < this.data.length; i++) {
+              const dataObject = this.data[i]
+              this.landFillData.push(dataObject)
+            }
+            if (this.positionValid) {
+            this.landFillData = this.findMinLandfill(this.landFillData);
+            }
+            this.setPages(this.landFillData);
+            this.searchDone = true;
+            this.showLandfill = true;
           }
-          this.landFillData = this.findMinLandfill(this.landFillData);
-          this.setPages(this.landFillData);
-          this.searchDone = true;
-          this.showLandfill = true;
         }
-      }
       );
   }
   setPages(data: any) {

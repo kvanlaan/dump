@@ -14,10 +14,11 @@ export const TYPEAHEAD_CONTROL_VALUE_ACCESSOR: any = {
 @Component({
   selector: 'typeahead',
   template: `
-    <div class="margin-auto typeahead">
+    <div [class]="margin" class="typeahead">
     <mat-input-container class="white">
-      <input matInput  #inputElement
-        placeholder="What do you need to dump?"
+    <img *ngIf="showD" class="logo inline" style="margin-left: -15%" src="./../../assets/dump.png">
+      <input style="display: inline !important" matInput #inputElement
+        [placeholder]="placeholder"
         [(ngModel)]="input"
         type="text"
         class="white"
@@ -36,7 +37,6 @@ export const TYPEAHEAD_CONTROL_VALUE_ACCESSOR: any = {
         spellcheck="false"
         disabled="true">
         </mat-input-container>
-
       <div #suggestionsContainer
         class="typeahead-suggestions"
         [hidden]="!areSuggestionsVisible">
@@ -60,10 +60,9 @@ export const TYPEAHEAD_CONTROL_VALUE_ACCESSOR: any = {
   }
     .typeahead {
       position: relative;
-      width: 200px;
+      width: 225px;
       text-align: center;
       vertical-align: top;
-
     }
 
     .typeahead-input {
@@ -86,7 +85,7 @@ export const TYPEAHEAD_CONTROL_VALUE_ACCESSOR: any = {
     }
 
     .typeahead-suggestions {
-      margin-top: -20px;
+      margin-top: -10px;
       position: absolute;
       overflow-y: auto;
       color: #666666;
@@ -119,7 +118,8 @@ export const TYPEAHEAD_CONTROL_VALUE_ACCESSOR: any = {
 })
 export class TypeaheadComponent implements OnInit, ControlValueAccessor {
   abstract: any;
-
+  showD = false;
+  margin = 'margin-auto typeahead';
   /**
    * The complete list of items.
    */
@@ -128,7 +128,7 @@ export class TypeaheadComponent implements OnInit, ControlValueAccessor {
   /**
    * Input element placeholder text.
    */
-  @Input() placeholder = '';
+  @Input() placeholder = 'What do you need to dump?';
 
   /**
    * The property of a list item that should be used for matching.
@@ -219,26 +219,34 @@ export class TypeaheadComponent implements OnInit, ControlValueAccessor {
       if (this.input && !this.selectedSuggestion) {
         const suggestion = this.list.find(item => similarity(this.input, item.label) > 0.6) // change so it's the max
         if (suggestion !== undefined) {
+          // this.showD = true;
+          // this.margin = 'margin-left-18 margin-top-neg-5 margin-right-auto typeahead';
+          // this.placeholder = '';
           this.suggestionSelected.emit(suggestion);
         } else {
           this.badQuery.emit(this.input);
         }
       } else {
-        console.log('failed b', this.input, 'selected suggestion', this.selectedSuggestion);
+        // this.showD = true;
+        // this.margin = 'margin-left-18 margin-top-neg-5 margin-right-auto typeahead';
+        // this.placeholder = '';
         this.suggestionSelected.emit(this.selectedSuggestion);
       }
     }
   }
 
-  //   @HostListener('click', ['$event'])
-  // toggle() {
-  //   console.log('toggling');
-  //   this.suggestions = this.list;
-  //     this.activeSuggestion = this.suggestions[0];
-  //     this.populateTypeahead();
-  //     this.areSuggestionsVisible = true;
-  // }
   public ngOnInit() {
+    let url = new URL(window.location.href);
+    if (url.href.indexOf('search') > -1) {
+      // this.margin = 'margin-left-18 margin-top-neg-5 margin-right-auto typeahead';
+      this.placeholder = '';
+      // this.showD = true;
+      const urlArr = url.href.split('/home');
+      const urlArrTwo = urlArr[1].split('/');
+      const searchIndex = urlArrTwo.indexOf('search');
+      this.input = urlArrTwo[searchIndex + 1];
+      this.input = this.input.replace(/%20/g, ' ');
+    } 
   }
 
   /**
@@ -437,29 +445,6 @@ export class TypeaheadComponent implements OnInit, ControlValueAccessor {
    * Called when a focus event is fired on the input element.
    */
   public inputFocus(event: FocusEvent) {
-    // console.log('focusing');
-    // // If the element is receiving focus and it has a selection, then
-    // // clear the selection. This helps prevent partial editing
-    // if (this.selectedSuggestion != null) {
-    //   this.selectSuggestion(null);
-    //   this.input = '';
-    //   this.populateTypeahead();
-    // }
-
-    // // Re-populate the suggestions
-    // this.populateSuggestions();
-
-    // // If we have suggestions
-    // if (this.suggestions.length > 0) {
-    //   // Set the typeahead to a slice of the first suggestion
-    //   this.populateTypeahead();
-
-    //   // Show/hide the suggestions
-    //   this.areSuggestionsVisible = this.suggestions.length > 0;
-    // }
-
-
-    //   console.log('toggling');
     this.suggestions = this.list;
     this.activeSuggestion = this.suggestions[0];
     this.populateTypeahead();
@@ -573,6 +558,9 @@ export class TypeaheadComponent implements OnInit, ControlValueAccessor {
     this.areSuggestionsVisible = false;
 
     // Notify the parent component
+    // this.showD = true;
+    // this.placeholder = '';
+    // this.margin = 'margin-left-18 margin-top-neg-5 margin-right-auto typeahead';
     this.suggestionSelected.emit(suggestion);
 
     // Other form operations

@@ -7,6 +7,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 declare var google: any;
 import { Location } from '@angular/common';
 import { GoogleplaceDirective } from '../directives/googleplace.directive';
+import { PositionService } from '../position.service';
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
@@ -35,7 +36,7 @@ export class MapComponent implements OnInit {
     this.mapHeight = window.innerHeight;
   }
 
-  constructor(private gmapsApi: MapsAPILoader, private location: Location) {
+  constructor(private positionService: PositionService, private gmapsApi: MapsAPILoader, private location: Location) {
   }
   goBack() {
     this.location.back();
@@ -80,31 +81,30 @@ export class MapComponent implements OnInit {
     if (address) {
       this.destination = address.replace(/%20/g, ' ');
     }
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position: any) => {
-        this.lat = Number(position.coords.latitude);
-        this.lng = Number(position.coords.longitude);
-        this.gmapsApi.load().then(() => {
-          const geocoder = new google.maps.Geocoder;
-          const latlng = { lat: this.lat, lng: this.lng };
-          geocoder.geocode({ 'location': latlng }, function (this: MapComponent, results: any, status: any) {
-            if (status === google.maps.GeocoderStatus.OK) {
-              if (results[1]) {
-                let origin = results[0]
-                origin = origin.formatted_address
-                this.origin = origin;
-                this.ready = true;
+    const position = this.positionService.getPosition();
+    console.log('position', position);
+    if (position !== null && position !== undefined) {
+      this.lat = Number(position.lat);
+      this.lng = Number(position.lon);
+      this.gmapsApi.load().then(() => {
+        const geocoder = new google.maps.Geocoder;
+        const latlng = { lat: this.lat, lng: this.lng };
+        geocoder.geocode({ 'location': latlng }, function (this: MapComponent, results: any, status: any) {
+          if (status === google.maps.GeocoderStatus.OK) {
+            if (results[1]) {
+              let origin = results[0]
+              origin = origin.formatted_address
+              this.origin = origin;
+              this.ready = true;
 
-                this.showing = '1';
-                this.directionsList.getDirections(this.origin, this.destination);
-                this.getLocationFormatting();
-              }
-            };
-          }.bind(this))
-        })
+              this.showing = '1';
+              this.directionsList.getDirections(this.origin, this.destination);
+              this.getLocationFormatting();
+            }
+          };
+        }.bind(this))
       })
     }
-
   }
 
   getDirections() {

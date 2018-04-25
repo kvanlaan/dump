@@ -6,7 +6,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { NavComponent, DialogContentExampleDialogComponent } from './nav/nav.component';
+import { NavComponent, InfoDialogComponent } from './nav/nav.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -26,6 +26,9 @@ import { SearchComponent } from './nav/search/search.component';
 import { MatAutocompleteModule } from '@angular/material';
 import { MatDialogModule } from '@angular/material';
 import { DumpComponent } from './dump/dump.component';
+import { PositionService } from './position.service';
+import { LocationDialogComponent } from './location-dialog/location-dialog.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,10 +41,12 @@ import { DumpComponent } from './dump/dump.component';
     GoogleplaceDirective,
     RecyclingComponent,
     SearchComponent,
-    DialogContentExampleDialogComponent,
-    DumpComponent],
+    InfoDialogComponent,
+    LocationDialogComponent,
+    DumpComponent,
+    SignUpComponent],
   entryComponents: [
-    DialogContentExampleDialogComponent
+    InfoDialogComponent, LocationDialogComponent
   ],
 
   imports: [
@@ -62,7 +67,7 @@ import { DumpComponent } from './dump/dump.component';
       libraries: ['places']
     })
   ],
-  providers: [],
+  providers: [PositionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

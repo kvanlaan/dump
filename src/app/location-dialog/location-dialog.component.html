@@ -1,0 +1,15 @@
+<button class="material-text float-right hover" style="min-width: 0px !important; margin-right: -20px !important; margin-top: -20px !important; opacity: .5"
+    mat-icon-button mat-dialog-close>X</button>
+
+<span style="text-align: left; color: rgba(0,0,0,.54)">
+    <h2 mat-dialog-title style="color: rgba(0,0,0,.87)"> Please Provide Your Address</h2>
+    <mat-dialog-content style="overflow: visible">
+        In order to provide you with listings closest to your current location please provide an address:
+        <br>
+      <span>  <mat-form-field style="border-bottom: black 1px solid !important; text-overflow: ellipsis !important;">
+            <input matInput [(ngModel)]="address" value="{{address}}" (setAddress)="getAddress($event)" style="text-overflow: ellipsis !important; color: black !important; border-bottom: black;"
+                googleplace>
+        </mat-form-field></span>
+    </mat-dialog-content>
+
+</span>

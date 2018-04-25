@@ -12,27 +12,33 @@ import 'rxjs/add/operator/catch';
 import { FormControl } from '@angular/forms';
 import * as similarity from 'similarity';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
+import { PositionService } from '../position.service';
+import { Coords } from '../coords.model';
+import { LocationDialogComponent } from '../location-dialog/location-dialog.component';
 @Component({
   templateUrl: './info.component.html'
 })
 
-export class DialogContentExampleDialogComponent {
+export class InfoDialogComponent {
 
 }
+
 @Component({
   selector: 'app-nav-component',
   templateUrl: './nav.component.html',
-  entryComponents: [DialogContentExampleDialogComponent]
+  entryComponents: [InfoDialogComponent]
 })
 
 export class NavComponent implements OnInit {
-  margin = 'margin-top-20';
+  address: any;
   searchQuery: string;
   badQueryString = '';
-  showInfoBox = false;
+  searchDone = false;
+  height;
   label = '';
   showBadQuery = false;
   showFancyBadQuery = false;
+  @ViewChild('typeahead') typeahead;
   list: Array<Item> = [
     { label: 'steel can', value: 'steel' },
     { label: 'aluminum can', value: 'can' },
@@ -103,23 +109,47 @@ export class NavComponent implements OnInit {
     // { label: 'dead bodies', value: 'body' }
   ]
 
-  constructor(private router: Router, private route: ActivatedRoute, public dialog: MatDialog) {
-
+  constructor(private positionService: PositionService, private router: Router, private route: ActivatedRoute, public dialog: MatDialog, public dialogTwo: MatDialog) {
+    this.positionService.positionFailed.subscribe(
+      data => {
+        this.openLocationDialog();
+      });
+      this.positionService.positionChanged.subscribe(
+        data => {
+          this.refreshAddress();
+        });
   }
 
   // key for google places api AIzaSyCgLu0hpZUwRVjFXlG8OUHd9JvKCV12vvY
 
-  openDialog() {
-    const dialogRef = this.dialog.open(DialogContentExampleDialogComponent, {
+  openInfoDialog() {
+    const dialogRef = this.dialog.open(InfoDialogComponent, {
       width: '450px'
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
     });
   }
 
+  openLocationDialog() {
+    console.log('triggered');
+    const position = this.positionService.getPosition();
+
+    if (position === undefined || position === null) {
+      console.log('here 2');
+      const dialogRef = this.dialogTwo.open(LocationDialogComponent, {
+        width: '450px'
+      });
+      dialogRef.afterClosed().subscribe(result => {
+      });
+    }
+
+
+  }
+
   ngOnInit() {
+    this.refreshAddress();
+    this.height = window.innerHeight;
     let url = new URL(window.location.href);
     if (url.href.indexOf('search') > -1) {
       const urlArr = url.href.split('/home');
@@ -127,43 +157,61 @@ export class NavComponent implements OnInit {
       const searchIndex = urlArrTwo.indexOf('search');
       this.label = urlArrTwo[searchIndex + 1];
       this.label = this.label.replace(/%20/g, ' ');
-      this.margin = 'margin-top-1';
+      this.searchDone = true;
     } else {
-      this.margin = 'margin-top-20';
-      this.openDialog();
+      this.openInfoDialog();
     }
-
     this.router.events.subscribe(async (event: NavigationEnd) => {
       if (event instanceof NavigationEnd) {
         url = new URL(window.location.href);
         if (url.href.indexOf('search') > -1) {
-          this.margin = 'margin-top-1';
+          this.searchDone = true;
         } else {
-          this.margin = 'margin-top-20';
+          this.searchDone = false;
         }
       }
     })
+  }
+
+
+refreshAddress() {
+  console.log('refreshing address')
+  this.address = this.positionService.getAddress();
+  if (this.address === null || this.address === undefined) {
+    console.log('it was nullish')
+    this.address = 'Your Current Address';
+  }
+}
+  public getAddress(place: Object) {
+    console.log('place', place);
+    this.address = place['formatted_address'];
+    const geometry = place['geometry'];
+    const location = geometry['location'];
+    const lat = location['lat'];
+    const lng = location['lng'];
+    const newCoords = { lat: lat(), lon: lng() } as Coords;
+
+    this.positionService.setPosition(newCoords);
   }
 
   filterQuery(event: any) {
     this.showBadQuery = false;
     if (event !== undefined) {
       this.label = event.label;
-      this.margin = 'margin-top-1';
+      this.searchDone = true;
       this.router.navigate(['home/search/', this.label]);
     }
   }
-  toggleInfoBox() {
-    this.showInfoBox = !this.showInfoBox;
-  }
+
   badQuery(event: any) {
     const url = new URL(window.location.href);
     this.badQueryString = event;
     if (url.href.indexOf('search') < 0) {
       this.showBadQuery = true;
-
     } else {
       this.router.navigate(['home/search/' + this.label + '/bad/', event]);
     }
   }
+
+
 }
