@@ -17,7 +17,7 @@ export const TYPEAHEAD_CONTROL_VALUE_ACCESSOR: any = {
     <div [class]="margin" class="typeahead">
     <mat-input-container class="white">
     <img *ngIf="showD" class="logo inline" style="margin-left: -15%" src="./../../assets/dump.png">
-      <input style="display: inline !important" matInput #inputElement
+      <input autocomplete="off" style="display: inline !important" matInput #inputElement
         [placeholder]="placeholder"
         [(ngModel)]="input"
         type="text"

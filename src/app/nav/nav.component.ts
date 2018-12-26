@@ -44,7 +44,8 @@ export class NavComponent implements OnInit {
     { label: 'aluminum can', value: 'can' },
     { label: 'tin can', value: 'tin' },
     { label: 'plastic', value: 'plastic' },
-    { label: 'battery', value: 'batteries' }, // make thing look for value if search does not return label
+    { label: 'battery', value: 'batteries' }, 
+    // make thing look for value if search does not return label
     { label: 'batteries', value: 'batteries' },
     { label: 'paints', value: 'paint' },
     { label: 'paint', value: 'paint' },
@@ -110,7 +111,9 @@ export class NavComponent implements OnInit {
   ]
   @HostListener('window:resize', ['$event'])
   onResize(event) {
+    if(!this.searchDone) {
     this.height = window.innerHeight;
+    }
   }
   constructor(private positionService: PositionService, private router: Router, private route: ActivatedRoute, public dialog: MatDialog, public dialogTwo: MatDialog) {
     this.positionService.positionFailed.subscribe(
@@ -167,8 +170,10 @@ export class NavComponent implements OnInit {
     this.router.events.subscribe(async (event: NavigationEnd) => {
       if (event instanceof NavigationEnd) {
         url = new URL(window.location.href);
-        if (url.href.indexOf('search') > -1) {
+        const urlAfterRedirects = event.urlAfterRedirects;
+        if (urlAfterRedirects.indexOf('search') > -1) {
           this.searchDone = true;
+
         } else {
           this.searchDone = false;
         }

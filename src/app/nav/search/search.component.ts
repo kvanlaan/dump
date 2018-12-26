@@ -213,7 +213,7 @@ export class SearchComponent implements OnInit {
               const dataObject = this.data[i]
               const categories = dataObject.Category.toLowerCase();
               const materials = dataObject.Materials.toLowerCase();
-              if (materials.indexOf(query.label.toLowerCase()) > -1 || categories.indexOf(query.label.toLowerCase()) > -1) {
+              if (materials.indexOf(query.label.toLowerCase()) > -1 || categories.indexOf(query.label.toLowerCase()) > -1 || materials.indexOf(query.value.toLowerCase()) > -1 || categories.indexOf(query.value.toLowerCase()) > -1) {
                 this.recycleData.push(dataObject)
               }
             }

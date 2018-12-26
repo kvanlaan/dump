@@ -1,5 +1,5 @@
 <div [style.height.px]="height" fxLayout="column" class="green-background">
-<div fxFlex="100" class="green-background">
+<div class="green-background">
   <div *ngIf="!searchDone">
     <div (click)="openInfoDialog()" class="circle text-green">?
     </div>
@@ -12,9 +12,9 @@
       <h1 class="margin-top-20">Dump</h1>
     </div>
     <typeahead #typeahead (badQuery)="badQuery($event)" (suggestionSelected)="filterQuery($event)" [list]="list" [displayProperty]="'label'"
-      [searchProperty]="'label'" autocomplete="off" ></typeahead>
+      [searchProperty]="'label'"></typeahead>
   </div>
-  <div *ngIf="searchDone"  class="border-bottom height-6"fxLayout="row" fxLayoutWrap>
+  <div *ngIf="searchDone"  class="border-bottom" fxLayout="row" fxLayoutWrap>
     <div (click)="openInfoDialog()" class="circle text-green">?
     </div>
     <div [routerLink]="['/home/']" class="circle text-green">
@@ -22,7 +22,8 @@
     </div>
     <typeahead style="margin-top: 5px" #typeahead (badQuery)="badQuery($event)" (suggestionSelected)="filterQuery($event)"
       [list]="list" [displayProperty]="'label'" [searchProperty]="'label'"></typeahead>
-      <span class="white margin-auto"><i class="material-icons">room</i> <mat-form-field style="width: auto">
+      <span class="white margin-auto">
+        <mat-form-field style="width: auto">
         <input style="overflow: ellipsis !important; text-overflow: ellipsis !important;" matInput [(ngModel)]="address" value="{{address}}" (setAddress)="getAddress($event)" googleplace>
     </mat-form-field></span>
     <div class="margin-left-auto margin-bot-0 height-auto">
@@ -33,7 +34,8 @@
 </div>
 <div class="white" *ngIf="showBadQuery"> Your query
   <span class="italic">{{badQueryString}}</span> found no listings. Please try again. </div>
-<div>
+
+<div fxFlex *ngIf="searchDone" fxFlexAlign="start start">
   <router-outlet></router-outlet>
 </div>
 </div>
