@@ -6,7 +6,7 @@
     <span class="white margin-auto">
       <i class="material-icons" style="background: white; color: #85D9BF;">room</i>
 
-      <mat-form-field *ngIf="addressReady" style="max-width: 275px">
+      <mat-form-field *ngIf="addressReady" style="max-width: 320px">
       <input matInput style="overflow: ellipsis !important; text-overflow: ellipsis !important;"  [(ngModel)]="address" value="{{address}}" (setAddress)="getAddress($event)" googleplace>
   </mat-form-field></span>
     <div class="header">
@@ -23,10 +23,10 @@
     </div>
     <typeahead style="margin-top: 5px" #typeahead (badQuery)="badQuery($event)" (suggestionSelected)="filterQuery($event)"
       [list]="list" [displayProperty]="'label'" [searchProperty]="'label'"></typeahead>
-      <span class="white margin-auto"fxLayout="row">
-        <i class="material-icons" style="background: white; color: #85D9BF;">room</i>
+      <span class="white margin-auto" style="min-width: 340px" fxLayout="row">
+        <i class="material-icons">room</i>
 
-        <mat-form-field style="max-width: 275px">
+        <mat-form-field style="max-width: 320px">
           <input style="overflow: ellipsis !important; text-overflow: ellipsis !important;"   matInput [(ngModel)]="address" value="{{address}}" (setAddress)="getAddress($event)" googleplace>
     </mat-form-field></span>
     <div class="margin-left-auto margin-bot-0 height-auto">
