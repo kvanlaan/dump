@@ -17,7 +17,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   MatExpansionModule, MatButtonModule, MatInputModule,
   MatPaginatorModule, MatCardModule, MatProgressSpinnerModule, MatCheckboxModule, MatSidenavModule,
-  MatDialog
+  MatDialog,
+  MatFormField,
+  MatFormFieldModule
 } from '@angular/material';
 import { YelpComponent } from './yelp/yelp.component';
 import { LandfillComponent } from './landfill/landfill.component';
@@ -56,7 +58,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
     FormsModule,
     MatAutocompleteModule,
     MatDialogModule, MatSidenavModule, MatExpansionModule,
-    MatButtonModule, MatPaginatorModule, MatProgressSpinnerModule, MatCheckboxModule, MatCardModule,
+    MatButtonModule, MatFormFieldModule,  MatInputModule, MatPaginatorModule, MatProgressSpinnerModule, MatCheckboxModule, MatCardModule,
     ReactiveFormsModule,
     HttpModule,
     NgxPaginationModule,

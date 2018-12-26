@@ -5,8 +5,10 @@
     </div>
     <span class="white margin-auto">
       <!-- <i class="material-icons">room</i>  -->
-      <mat-form-field style="width: auto">
-      <input matInput style="overflow: ellipsis !important; text-overflow: ellipsis !important;" [(ngModel)]="address" value="{{address}}" (setAddress)="getAddress($event)" googleplace>
+  
+      <mat-form-field *ngIf="addressReady" style="max-width: 275px">
+          <!-- style="overflow: ellipsis !important; text-overflow: ellipsis !important;" -->
+      <input matInput placeholder="Your Current Address" style="overflow: ellipsis !important; text-overflow: ellipsis !important;"  [(ngModel)]="address" value="{{address}}" (setAddress)="getAddress($event)" googleplace>
   </mat-form-field></span>
     <div class="header">
       <h1 class="margin-top-20">Dump</h1>
@@ -22,9 +24,11 @@
     </div>
     <typeahead style="margin-top: 5px" #typeahead (badQuery)="badQuery($event)" (suggestionSelected)="filterQuery($event)"
       [list]="list" [displayProperty]="'label'" [searchProperty]="'label'"></typeahead>
-      <span class="white margin-auto">
-        <mat-form-field style="width: auto">
-        <input style="overflow: ellipsis !important; text-overflow: ellipsis !important;" matInput [(ngModel)]="address" value="{{address}}" (setAddress)="getAddress($event)" googleplace>
+      <span class="white margin-auto"fxLayout="row">
+          <i class="material-icons" style="display: inline !important">room</i> 
+
+        <mat-form-field style="max-width: 275px">
+          <input style="overflow: ellipsis !important; text-overflow: ellipsis !important;"   matInput [(ngModel)]="address" value="{{address}}" (setAddress)="getAddress($event)" googleplace>
     </mat-form-field></span>
     <div class="margin-left-auto margin-bot-0 height-auto">
       <!-- <button class="white height-100 margin-right-0" mat-button>Log in</button>

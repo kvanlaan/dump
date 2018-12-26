@@ -180,14 +180,20 @@ export class NavComponent implements OnInit {
       }
     })
   }
-
+  addressReady = true;
 
 refreshAddress() {
   console.log('refreshing address')
   this.address = this.positionService.getAddress();
   if (this.address === null || this.address === undefined) {
     console.log('it was nullish')
+    if(this.searchDone) {
     this.address = 'Your Current Address';
+    }
+  } else {
+    // this.addressReady = false;
+    // this.addressReady = true;
+
   }
 }
   public getAddress(place: Object) {
