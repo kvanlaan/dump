@@ -496,7 +496,12 @@ img {
 .z-index-3 {
     z-index: 3;
 }
-
+.dump-button:hover {
+   cursor: pointer;
+}
+.dump-button:focus {
+    outline: none !important;
+}
 
 @media only screen and (max-width: 900px) {
 
