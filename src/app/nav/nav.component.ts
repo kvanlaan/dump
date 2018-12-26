@@ -108,7 +108,10 @@ export class NavComponent implements OnInit {
     // { label: 'bodies', value: 'body' },
     // { label: 'dead bodies', value: 'body' }
   ]
-
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.height = window.innerHeight;
+  }
   constructor(private positionService: PositionService, private router: Router, private route: ActivatedRoute, public dialog: MatDialog, public dialogTwo: MatDialog) {
     this.positionService.positionFailed.subscribe(
       data => {

@@ -3,7 +3,9 @@
   <div *ngIf="!searchDone">
     <div (click)="openInfoDialog()" class="circle text-green">?
     </div>
-    <span class="white margin-auto"><i class="material-icons">room</i> <mat-form-field style="width: auto">
+    <span class="white margin-auto">
+      <!-- <i class="material-icons">room</i>  -->
+      <mat-form-field style="width: auto">
       <input matInput style="overflow: ellipsis !important; text-overflow: ellipsis !important;" [(ngModel)]="address" value="{{address}}" (setAddress)="getAddress($event)" googleplace>
   </mat-form-field></span>
     <div class="header">
@@ -24,8 +26,8 @@
         <input style="overflow: ellipsis !important; text-overflow: ellipsis !important;" matInput [(ngModel)]="address" value="{{address}}" (setAddress)="getAddress($event)" googleplace>
     </mat-form-field></span>
     <div class="margin-left-auto margin-bot-0 height-auto">
-      <button class="white height-100 margin-right-0" mat-button>Log in</button>
-      <button class="white height-100 margin-left-0" mat-button>Sign Up</button>
+      <!-- <button class="white height-100 margin-right-0" mat-button>Log in</button>
+      <button class="white height-100 margin-left-0" mat-button>Sign Up</button> -->
     </div>
   </div>
 </div>
