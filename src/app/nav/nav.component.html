@@ -24,7 +24,7 @@
     <typeahead style="margin-top: 5px" #typeahead (badQuery)="badQuery($event)" (suggestionSelected)="filterQuery($event)"
       [list]="list" [displayProperty]="'label'" [searchProperty]="'label'"></typeahead>
       <span class="white margin-auto"fxLayout="row">
-          <i class="material-icons" style="display: inline !important">room</i> 
+        <i class="material-icons" style="background: white; color: #85D9BF;">room</i>
 
         <mat-form-field style="max-width: 275px">
           <input style="overflow: ellipsis !important; text-overflow: ellipsis !important;"   matInput [(ngModel)]="address" value="{{address}}" (setAddress)="getAddress($event)" googleplace>
