@@ -4,11 +4,10 @@
     <div (click)="openInfoDialog()" class="circle text-green">?
     </div>
     <span class="white margin-auto">
-      <!-- <i class="material-icons">room</i>  -->
-  
+      <i class="material-icons" style="background: white; color: #85D9BF;">room</i>
+
       <mat-form-field *ngIf="addressReady" style="max-width: 275px">
-          <!-- style="overflow: ellipsis !important; text-overflow: ellipsis !important;" -->
-      <input matInput placeholder="Your Current Address" style="overflow: ellipsis !important; text-overflow: ellipsis !important;"  [(ngModel)]="address" value="{{address}}" (setAddress)="getAddress($event)" googleplace>
+      <input matInput style="overflow: ellipsis !important; text-overflow: ellipsis !important;"  [(ngModel)]="address" value="{{address}}" (setAddress)="getAddress($event)" googleplace>
   </mat-form-field></span>
     <div class="header">
       <h1 class="margin-top-20">Dump</h1>

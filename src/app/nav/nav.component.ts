@@ -187,9 +187,8 @@ refreshAddress() {
   this.address = this.positionService.getAddress();
   if (this.address === null || this.address === undefined) {
     console.log('it was nullish')
-    if(this.searchDone) {
-    this.address = 'Your Current Address';
-    }
+    this.address = 'Enter Your Current Address...';
+    
   } else {
     // this.addressReady = false;
     // this.addressReady = true;
