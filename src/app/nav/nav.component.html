@@ -22,7 +22,6 @@
     <div [routerLink]="['/home/']" class="dump-button circle text-green">
       D
     </div>
-    <!-- <mat-button> test </mat-button> -->
     <typeahead style="margin-top: 5px" #typeahead (badQuery)="badQuery($event)" (suggestionSelected)="filterQuery($event)"
       [list]="list" [displayProperty]="'label'" [searchProperty]="'label'"></typeahead>
       <span class="white margin-auto" style="min-width: 340px" fxLayout="row">
@@ -32,8 +31,6 @@
           <input style="overflow: ellipsis !important; text-overflow: ellipsis !important;"   matInput [(ngModel)]="address" value="{{address}}" (setAddress)="getAddress($event)" googleplace>
     </mat-form-field></span>
     <div class="margin-left-auto margin-bot-0 height-auto">
-      <button class="white height-100 margin-right-0" mat-button>Log in</button>
-      <button class="white height-100 margin-left-0" mat-button>Sign Up</button>
     </div>
   </div>
 </div>
