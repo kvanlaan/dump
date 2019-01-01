@@ -25,8 +25,8 @@ export class InfoDialogComponent {
 
 @Component({
   selector: 'app-nav-component',
-  templateUrl: './nav.component.html',
-  entryComponents: [InfoDialogComponent]
+  templateUrl: './nav.component.html'
+  // entryComponents: [InfoDialogComponent]
 })
 
 export class NavComponent implements OnInit {
@@ -44,7 +44,7 @@ export class NavComponent implements OnInit {
     { label: 'aluminum can', value: 'can' },
     { label: 'tin can', value: 'tin' },
     { label: 'plastic', value: 'plastic' },
-    { label: 'battery', value: 'batteries' }, 
+    { label: 'battery', value: 'batteries' },
     // make thing look for value if search does not return label
     { label: 'batteries', value: 'batteries' },
     { label: 'paints', value: 'paint' },
@@ -111,30 +111,38 @@ export class NavComponent implements OnInit {
   ]
   @HostListener('window:resize', ['$event'])
   onResize(event) {
-    if(!this.searchDone) {
-    this.height = window.innerHeight;
+    if (!this.searchDone) {
+      this.height = window.innerHeight;
     }
+
   }
-  constructor(private positionService: PositionService, private router: Router, private route: ActivatedRoute, public dialog: MatDialog, public dialogTwo: MatDialog) {
+
+  constructor(private positionService: PositionService,
+    private router: Router, private route: ActivatedRoute,
+    public dialog: MatDialog,
+    public dialogTwo: MatDialog) {
     this.positionService.positionFailed.subscribe(
       data => {
         this.openLocationDialog();
       });
-      this.positionService.positionChanged.subscribe(
-        data => {
-          this.refreshAddress();
-        });
+    this.positionService.positionChanged.subscribe(
+      data => {
+        this.refreshAddress();
+      });
   }
 
   // key for google places api AIzaSyCgLu0hpZUwRVjFXlG8OUHd9JvKCV12vvY
-
+  infoOpen = false;
   openInfoDialog() {
-    const dialogRef = this.dialog.open(InfoDialogComponent, {
-      width: '450px'
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-    });
+    if (!this.infoOpen) {
+      const dialogRef = this.dialog.open(InfoDialogComponent, {
+        width: '450px'
+      });
+      this.infoOpen = true;
+      dialogRef.afterClosed().subscribe(result => {
+        this.infoOpen = false;
+      });
+    }
   }
 
   openLocationDialog() {
@@ -155,7 +163,7 @@ export class NavComponent implements OnInit {
 
   ngOnInit() {
     this.refreshAddress();
-    this.height = window.innerHeight;
+
     let url = new URL(window.location.href);
     if (url.href.indexOf('search') > -1) {
       const urlArr = url.href.split('/home');
@@ -167,6 +175,7 @@ export class NavComponent implements OnInit {
     } else {
       this.openInfoDialog();
     }
+    this.height = window.innerHeight;
     this.router.events.subscribe(async (event: NavigationEnd) => {
       if (event instanceof NavigationEnd) {
         url = new URL(window.location.href);
@@ -182,19 +191,19 @@ export class NavComponent implements OnInit {
   }
   addressReady = true;
 
-refreshAddress() {
-  console.log('refreshing address')
-  this.address = this.positionService.getAddress();
-  if (this.address === null || this.address === undefined) {
-    console.log('it was nullish')
-    this.address = 'Enter Your Current Address...';
-    
-  } else {
-    // this.addressReady = false;
-    // this.addressReady = true;
+  refreshAddress() {
+    console.log('refreshing address')
+    this.address = this.positionService.getAddress();
+    if (this.address === null || this.address === undefined) {
+      console.log('it was nullish')
+      this.address = 'Enter Your Current Address...';
 
+    } else {
+      // this.addressReady = false;
+      // this.addressReady = true;
+
+    }
   }
-}
   public getAddress(place: Object) {
     console.log('place', place);
     this.address = place['formatted_address'];

@@ -9,20 +9,27 @@ export const TYPEAHEAD_CONTROL_VALUE_ACCESSOR: any = {
   useExisting: forwardRef(() => TypeaheadComponent),
   multi: true
 };
+      // <button class="btn btn-outline-secondary" type="button" id="button-addon1">
+      //         <i class="material-icons">room</i>
 
+      // </button>
 
 @Component({
   selector: 'typeahead',
   template: `
-    <div [class]="margin" class="typeahead">
-    <mat-input-container class="white">
+    <div  [class]="margin" class="typeahead">
+    <div class="input-group">
     <img *ngIf="showD" class="logo inline" style="margin-left: -15%" src="./../../assets/dump.png">
-      <input autocomplete="off" style="display: inline !important" matInput #inputElement
+      <input 
+        autocomplete="off" 
+        style="display: inline !important; min-width: 230px"
+        #inputElement
         [placeholder]="placeholder"
         [(ngModel)]="input"
         type="text"
-        class="white"
         [ngClass]="{'typeahead-input': true, 'typeahead-input-has-selection': hasSelection()}"
+        class="form-control"
+
         typeahead="off"
         spellcheck="false"
         (keyup)="inputKeyUp($event)"
@@ -31,14 +38,22 @@ export const TYPEAHEAD_CONTROL_VALUE_ACCESSOR: any = {
         (offClick)="offClick()"
         (blur)="inputBlur($event)"
         [disabled]="isDisabled">
-        <input style="visibility: hidden" matInput type="text"
-        class="typeahead-typeahead"
+       
+        <input  type="text"  style="visibility: hidden" type="text"
+        class="typeahead-typeahead form-control"
         typeahead="off"
         spellcheck="false"
         disabled="true">
-        </mat-input-container>
+        <div class="input-group-append">
+        <span class="input-group-text" id="basic-addon2"><i class="material-icons">
+        search
+        </i>    </span>  </div>
+    </div>
+       
+     
+
       <div #suggestionsContainer
-        class="typeahead-suggestions"
+      class="typeahead-suggestions"
         [hidden]="!areSuggestionsVisible">
 
         <ul (mouseout)="suggestionsMouseOut($event)">
@@ -49,10 +64,8 @@ export const TYPEAHEAD_CONTROL_VALUE_ACCESSOR: any = {
             [ngClass]="{'typeahead-suggestion-active': activeSuggestion===suggestion}">{{ suggestion[displayProperty] }}</li>
 
         </ul>
-
+        </div>
       </div>
-
-    </div>
     `,
   styles: [`
   input {
@@ -60,16 +73,17 @@ export const TYPEAHEAD_CONTROL_VALUE_ACCESSOR: any = {
   }
     .typeahead {
       position: relative;
-      width: 225px;
+      width: 279.96px;
+
       text-align: center;
       vertical-align: top;
     }
 
     .typeahead-input {
-      border-color: transparent;
+      // border-color: transparent;
       position: absolute;
-      z-index: 10;
-      background-color: transparent;
+      z-index: 2;
+      // background-color: transparent;
       background-repeat: no-repeat;
       background-position: right 10px;
       background-size: 28px 18px;
@@ -79,13 +93,13 @@ export const TYPEAHEAD_CONTROL_VALUE_ACCESSOR: any = {
 
     .typeahead-typeahead {
       color: rgb(128, 128, 128);
-      z-index: 5;
+      z-index: 2;
       // text-align: left;
       background-color: rgb(255, 255, 255);
     }
 
     .typeahead-suggestions {
-      margin-top: -10px;
+      // margin-top: -10px;
       position: absolute;
       overflow-y: auto;
       color: #666666;
@@ -95,7 +109,7 @@ export const TYPEAHEAD_CONTROL_VALUE_ACCESSOR: any = {
       width: 100%;
       max-height: 18em !important;
       border: 1px solid #e0e0e0;
-      z-index: 100;
+      z-index: 5;
     }
 
     .typeahead-suggestions ul {
@@ -234,7 +248,24 @@ export class TypeaheadComponent implements OnInit, ControlValueAccessor {
       }
     }
   }
-
+  searchIcon() {
+    if (this.input && !this.selectedSuggestion) {
+      const suggestion = this.list.find(item => similarity(this.input, item.label) > 0.6) // change so it's the max
+      if (suggestion !== undefined) {
+        // this.showD = true;
+        // this.margin = 'margin-left-18 margin-top-neg-5 margin-right-auto typeahead';
+        // this.placeholder = '';
+        this.suggestionSelected.emit(suggestion);
+      } else {
+        this.badQuery.emit(this.input);
+      }
+    } else if(this.selectedSuggestion) {
+      // this.showD = true;
+      // this.margin = 'margin-left-18 margin-top-neg-5 margin-right-auto typeahead';
+      // this.placeholder = '';
+      this.suggestionSelected.emit(this.selectedSuggestion);
+    }
+  }
   public ngOnInit() {
     let url = new URL(window.location.href);
     if (url.href.indexOf('search') > -1) {

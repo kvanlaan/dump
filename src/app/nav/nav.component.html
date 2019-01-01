@@ -1,15 +1,19 @@
 <div [style.height.px]="height" fxLayout="column" class="green-background">
 <div class="green-background">
   <div *ngIf="!searchDone">
-    <div (click)="openInfoDialog()" class="circle text-green">?
+    <div (click)="openInfoDialog()" class="circle text-green cursor-hover">?
     </div>
+   <div class="input-group margin-auto" style="text-align:center; max-width: 400px">
+   <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1">
+        <i class="material-icons">room</i>
 
-    <span class="white margin-auto">
-      <i class="material-icons" style="background: white; color: #85D9BF;">room</i>
-
-      <mat-form-field *ngIf="addressReady" style="max-width: 320px">
-      <input matInput style="overflow: ellipsis !important; text-overflow: ellipsis !important;"  [(ngModel)]="address" value="{{address}}" (setAddress)="getAddress($event)" googleplace>
-  </mat-form-field></span>
+      </span>
+    </div>
+    <input type="text" class="form-control"  style="overflow: ellipsis !important; text-overflow: ellipsis !important;" 
+    [(ngModel)]="address" value="{{address}}" (setAddress)="getAddress($event)" googleplace>
+    
+  </div>
     <div class="header">
       <h1 class="margin-top-20">Dump</h1>
     </div>
@@ -17,19 +21,25 @@
       [searchProperty]="'label'"></typeahead>
   </div>
   <div *ngIf="searchDone"  class="border-bottom" fxLayout="row" fxLayoutWrap>
-    <div (click)="openInfoDialog()" class="circle text-green">?
+    <div (click)="openInfoDialog()" class="circle text-green cursor-hover">?
     </div>
     <div [routerLink]="['/home/']" class="dump-button circle text-green">
       D
     </div>
     <typeahead style="margin-top: 5px" #typeahead (badQuery)="badQuery($event)" (suggestionSelected)="filterQuery($event)"
       [list]="list" [displayProperty]="'label'" [searchProperty]="'label'"></typeahead>
-      <span class="white margin-auto" style="min-width: 340px" fxLayout="row">
-        <i class="material-icons">room</i>
-
-        <mat-form-field style="max-width: 320px">
-          <input style="overflow: ellipsis !important; text-overflow: ellipsis !important;"   matInput [(ngModel)]="address" value="{{address}}" (setAddress)="getAddress($event)" googleplace>
-    </mat-form-field></span>
+    
+   <div class="input-group margin-auto" style="text-align:center; max-width: 400px">
+    <div class="input-group-prepend">
+         <span class="input-group-text" id="basic-addon1">
+         <i class="material-icons">room</i>
+ 
+       </span>
+     </div>
+     <input type="text" class="form-control"  style="overflow: ellipsis !important; text-overflow: ellipsis !important;" aria-describedby="button-addon1"
+     [(ngModel)]="address" value="{{address}}" (setAddress)="getAddress($event)" googleplace>
+     
+   </div>
     <div class="margin-left-auto margin-bot-0 height-auto">
     </div>
   </div>

@@ -1,13 +1,13 @@
 <mat-sidenav-container [style.opacity]="showing" class="container">
   <mat-sidenav #sidenav fxLayout="column" class="sidenav" mode="side" opened="true">
 
-    <div class="green-background white" style="height: 104px">
+    <div class="green-background white" style="min-height: 72px !important;max-height: 72px !important; height: 72px !important;" >
        
       <div fxLayout="row">
         <i class="material-icons pointer" (click)="goBack()" style="opacity: .75; width: 30px;">reply</i>
         <div fxFlexAlign="end" style="font-size: 13px; padding-right: 5px; width: 30px; color: rgba(255,255,255,0.45)"> <span> from</span></div>
         <mat-form-field style="height: 40px !important; width: 264px">
-          <input matInput [(ngModel)]="origin" value="{{origin}}" (setAddress)="getAddress($event, 'origin')" style="padding-bottom: 0px !important;"
+          <input matInput [(ngModel)]="origin" value="{{origin}}" (setAddress)="getAddress($event, 'origin')" style="overflow: ellipsis !important; text-overflow: ellipsis !important; padding-bottom: 0px !important;"
             googleplace>
         </mat-form-field>
       </div>
@@ -16,17 +16,17 @@
         <i class="material-icons" style="width: 30px;"></i>
         <div fxFlexAlign="center" style="padding-right: 5px; font-size: 13px; width: 30px; color: rgba(255,255,255,0.45)"><span> to</span></div>
         <mat-form-field style="border-top: 0px !important; width: 264px">
-          <input matInput style="border-top: 0px !important;" value="{{destination}}" (setAddress)="getAddress($event, 'destination')"  googleplace>
+          <input matInput style="border-top: 0px !important; overflow: ellipsis !important; text-overflow: ellipsis !important;" value="{{destination}}" (setAddress)="getAddress($event, 'destination')"  googleplace>
         </mat-form-field>
       </div>
     </div>
-    <div style="background-color: #FFFFFF; height: auto; margin-left: 24px !important" *ngIf="directions">
-      <mat-card-subtitle style="block-size: 19px !important;" class="text-align-left">
+    <div style="background-color: #FFFFFF;  margin-left: 24px !important"  *ngIf="directions">
+      <mat-card-subtitle fxLayout="column" style="block-size: 19px !important; margin-top: 5px !important" class="text-align-left">
         <h2 style="margin-bottom: 0px; block-size: 19px !important;font-weight: 500; white-space: normal; color: rgba(0, 0, 0, 0.87);font-size: 16px">
         {{orgOne}}</h2>
         <div class="float-left">{{orgTwo}}</div>
         <div style="margin-top: 20px">
-          <div *ngFor="let dir of directions; let i = index" fxLayout="row">
+          <div class="float-left" *ngFor="let dir of directions; let i = index" fxLayout="row">
             <i style="color:rgba(0, 0, 0, 0.87); opacity: 0.4; padding-top: 18px;" class="material-icons">keyboard_arrow_right</i>
             <div style="padding-left: 14px;" fxLayout="column">
               <div style="padding-top: 20px; padding-bottom: 20px; color: #6C6C6C;">{{dir.instructions}}</div>
@@ -34,7 +34,7 @@
             </div>
           </div>
         </div>
-        <h2 style="margin-top: 20px; margin-bottom: 0px; block-size: 19px !important;font-weight: 500; white-space: normal; color: rgba(0, 0, 0, 0.87);font-size: 16px">
+        <h2 style="margin-bottom: 0px; margin-top: 10px !important; block-size: 19px !important;font-weight: 500; white-space: normal; color: rgba(0, 0, 0, 0.87);font-size: 16px">
         {{destOne}}</h2>
         <div style="margin-bottom: 20px;" class="float-left">{{destTwo}}</div>
       </mat-card-subtitle>

@@ -1,5 +1,5 @@
 <div *ngIf="searchDone && !showDump" fxFlex="100" class="margin-auto"> 
-  <mat-expansion-panel  [disabled]="true" class="margin-auto z-index-3">
+  <mat-expansion-panel  style="background: rgb(255, 255, 255)" [disabled]="true" class="margin-auto z-index-3">
     <mat-expansion-panel-header>
       <mat-panel-title fxLayout="row" fxFlex="100">
         Showing results for&nbsp;<span class="italic bold">{{query}}</span><span [fxShow.xs]="false">&nbsp;nearest to your current location</span><span *ngIf="badQuery">.&nbsp;No listings for 
@@ -12,8 +12,8 @@
     <app-recycling *ngIf="showRecycling" [list]="displayedData"></app-recycling>
     <app-landfill *ngIf="showLandfill" [list]="displayedData"></app-landfill>
     <app-yelp *ngIf="showYelp" [list]="displayedData"></app-yelp>
-    <mat-card-footer>
-      <mat-paginator *ngIf="searchDone" [ngClass]="{'noNav': this.pages === 1}" [length]="finalData.length" [pageSize]="pageSize"  (page)="changePage($event);">
+    <mat-card-footer  >
+      <mat-paginator style="background: rgb(255, 255, 255)" *ngIf="searchDone" [ngClass]="{'noNav': this.pages === 1}" [length]="finalData.length" [pageSize]="pageSize"  (page)="changePage($event);">
     </mat-paginator>
     </mat-card-footer>
   </mat-card>

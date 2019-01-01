@@ -26,6 +26,27 @@ ul, ol {
     cursor: pointer;
 }
 
+.cdk-overlay-pane {
+    z-index: 8;
+    position: fixed !important;
+    margin: auto !important; 
+    left:50% !important;
+    top: 50% !important;
+    background: white;
+    transform: translate(-50%, -50%);
+  }
+.container {
+    margin: 0;
+    max-width: 100%;
+    padding: 0px;
+}
+  .cdk-overlay-connected-position-bounding-box .cdk-overlay-pane{
+    z-index: 7;
+    margin-top: -255% !important;
+    margin-right: -100% !important;
+    margin-left: 400% !important;
+  }
+  
 /**
  * BOX-SIZING
  */
@@ -53,8 +74,9 @@ body {
  }
  .circle {
 	border-radius: 50%;
-	width: 20px;
-    height: 20px;
+    width: 24px;
+    line-height: 20px;
+    height: 24px;
     font-size: 19px;
     padding: 4px;
     margin: 10px;
@@ -246,9 +268,15 @@ a::before {
 input:focus {
   outline: none;
 }
-input {
-  padding: 1px 15px 1px 15px;
+button:focus {
+    outline: none;
+  }
+.form-control:focus {
+   box-shadow: 0 0 0 0em;
 }
+/* input {
+  padding: 1px 15px 1px 15px;
+} */
 .link:hover {
  outline: none;
  cursor: pointer;
@@ -476,6 +504,11 @@ md-spinner {
 .mat-input-wrapper {
     color: white !important;
 }
+.mat-button {
+    background: transparent;
+    background-color: transparent;
+}
+
 img {
    width: 150px;
    height: 100px;
@@ -499,6 +532,9 @@ img {
 .dump-button:hover {
    cursor: pointer;
 }
+.cursor-hover:hover {
+    cursor: pointer;
+ }
 .dump-button:focus {
     outline: none !important;
 }

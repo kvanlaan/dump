@@ -19,7 +19,8 @@ import {
   MatPaginatorModule, MatCardModule, MatProgressSpinnerModule, MatCheckboxModule, MatSidenavModule,
   MatDialog,
   MatFormField,
-  MatFormFieldModule
+  MatFormFieldModule,
+  MatIconModule
 } from '@angular/material';
 import { YelpComponent } from './yelp/yelp.component';
 import { LandfillComponent } from './landfill/landfill.component';
@@ -57,6 +58,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
     MatInputModule,
     FormsModule,
     MatAutocompleteModule,
+    MatIconModule,
     MatDialogModule, MatSidenavModule, MatExpansionModule,
     MatButtonModule, MatFormFieldModule,  MatInputModule, MatPaginatorModule, MatProgressSpinnerModule, MatCheckboxModule, MatCardModule,
     ReactiveFormsModule,
