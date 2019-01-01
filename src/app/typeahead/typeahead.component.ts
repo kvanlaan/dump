@@ -17,7 +17,7 @@ export const TYPEAHEAD_CONTROL_VALUE_ACCESSOR: any = {
 @Component({
   selector: 'typeahead',
   template: `
-    <div  [class]="margin" class="typeahead">
+    <div class="typeahead margin-auto">
     <div class="input-group">
     <img *ngIf="showD" class="logo inline" style="margin-left: -15%" src="./../../assets/dump.png">
       <input 
@@ -44,7 +44,7 @@ export const TYPEAHEAD_CONTROL_VALUE_ACCESSOR: any = {
         typeahead="off"
         spellcheck="false"
         disabled="true">
-        <div class="input-group-append">
+        <div (click)="searchIcon()" class="cursor-hover input-group-append">
         <span class="input-group-text" id="basic-addon2"><i class="material-icons">
         search
         </i>    </span>  </div>
@@ -133,7 +133,6 @@ export const TYPEAHEAD_CONTROL_VALUE_ACCESSOR: any = {
 export class TypeaheadComponent implements OnInit, ControlValueAccessor {
   abstract: any;
   showD = false;
-  margin = 'margin-auto typeahead';
   /**
    * The complete list of items.
    */
@@ -231,8 +230,21 @@ export class TypeaheadComponent implements OnInit, ControlValueAccessor {
     const x = event.keyCode;
     if (x === 13) {
       if (this.input && !this.selectedSuggestion) {
-        const suggestion = this.list.find(item => similarity(this.input, item.label) > 0.6) // change so it's the max
-        if (suggestion !== undefined) {
+        let similarityArr = [];
+         this.list.forEach(function(this, item) { 
+          // console.log(this.input, item.label, similarity(this.input, item.label))
+          if(similarity(this.input, item.label) > 0.5 || item.label.indexOf(this.input) > -1) {
+            similarityArr.push({'similarity': similarity(this.input, item.label), 'item': item})
+          }
+        }.bind(this))
+        similarityArr = similarityArr.sort(function (a, b) {
+          const hypA = (a.similarity),
+            hypB = (b.similarity)
+          return hypA - hypB
+        })
+
+        const suggestion = similarityArr[similarityArr.length - 1].item;
+        if(suggestion !== undefined) {
           // this.showD = true;
           // this.margin = 'margin-left-18 margin-top-neg-5 margin-right-auto typeahead';
           // this.placeholder = '';
@@ -250,7 +262,22 @@ export class TypeaheadComponent implements OnInit, ControlValueAccessor {
   }
   searchIcon() {
     if (this.input && !this.selectedSuggestion) {
-      const suggestion = this.list.find(item => similarity(this.input, item.label) > 0.6) // change so it's the max
+     
+      let similarityArr = [];
+      this.list.forEach(function(this, item) { 
+       // console.log(this.input, item.label, similarity(this.input, item.label))
+       if(similarity(this.input, item.label) > 0.5 || item.label.indexOf(this.input) > -1) {
+         similarityArr.push({'similarity': similarity(this.input, item.label), 'item': item})
+       }
+     }.bind(this))
+     similarityArr = similarityArr.sort(function (a, b) {
+       const hypA = (a.similarity),
+         hypB = (b.similarity)
+       return hypA - hypB
+     })
+
+     const suggestion = similarityArr[similarityArr.length - 1].item;
+
       if (suggestion !== undefined) {
         // this.showD = true;
         // this.margin = 'margin-left-18 margin-top-neg-5 margin-right-auto typeahead';

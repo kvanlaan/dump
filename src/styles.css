@@ -273,6 +273,7 @@ button:focus {
   }
 .form-control:focus {
    box-shadow: 0 0 0 0em;
+   border-color: rgb(206, 212, 218) !important;
 }
 /* input {
   padding: 1px 15px 1px 15px;
