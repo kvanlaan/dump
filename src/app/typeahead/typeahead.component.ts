@@ -105,27 +105,36 @@ export const TYPEAHEAD_CONTROL_VALUE_ACCESSOR: any = {
       color: #666666;
       border-radius: 3px;
       padding: 0;
-      background-color: #f5f5f5;
+      background-color: white;
       width: 100%;
       max-height: 18em !important;
       border: 1px solid #e0e0e0;
       z-index: 5;
+      box-shadow: 0 2px 4px -1px rgba(0,0,0,.2),0 4px 5px 0 rgba(0,0,0,.14),0 1px 10px 0 rgba(0,0,0,.12) !important;
     }
 
     .typeahead-suggestions ul {
       list-style-type: none;
       padding-left: 0;
       margin-top: 3px;
+      margin-bottom: 0px !important;
     }
 
     .typeahead-suggestions ul li {
       padding: 6px !important;
       font-size: 0.9em;
-      border-bottom: 1px solid #e0e0e0;
+      border-top: 1px solid white;
+      border-bottom: 1px solid white;
+    }
+
+    .typeahead-suggestions ul li:last-child {
+      border-radius: 3px;
     }
 
     .typeahead-suggestion-active{
       background-color:#fcf8e3;
+      border-top: 1px solid #e0e0e0 !important;
+      border-bottom: 1px solid #e0e0e0 !important;
     }
     `],
   providers: [TYPEAHEAD_CONTROL_VALUE_ACCESSOR]

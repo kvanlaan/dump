@@ -7,7 +7,7 @@
         <i class="material-icons pointer" (click)="goBack()" style="opacity: .75; width: 30px;">reply</i>
         <div fxFlexAlign="end" style="font-size: 13px; padding-right: 5px; width: 30px; color: rgba(255,255,255,0.45)"> <span> from</span></div>
         <mat-form-field style="height: 40px !important; width: 264px">
-          <input matInput [(ngModel)]="origin" value="{{origin}}" (setAddress)="getAddress($event, 'origin')" style="overflow: ellipsis !important; text-overflow: ellipsis !important; padding-bottom: 0px !important;"
+          <input matInput [(ngModel)]="origin" value="{{origin}}" (setAddress)="getAddress($event, 'origin')" style="padding-bottom: 0px !important;"
             googleplace>
         </mat-form-field>
       </div>
@@ -16,7 +16,7 @@
         <i class="material-icons" style="width: 30px;"></i>
         <div fxFlexAlign="center" style="padding-right: 5px; font-size: 13px; width: 30px; color: rgba(255,255,255,0.45)"><span> to</span></div>
         <mat-form-field style="border-top: 0px !important; width: 264px">
-          <input matInput style="border-top: 0px !important; overflow: ellipsis !important; text-overflow: ellipsis !important;" value="{{destination}}" (setAddress)="getAddress($event, 'destination')"  googleplace>
+          <input matInput style="border-top: 0px !important;" value="{{destination}}" (setAddress)="getAddress($event, 'destination')"  googleplace>
         </mat-form-field>
       </div>
     </div>
