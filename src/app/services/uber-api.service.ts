@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 export class UberApiService {
 
   constructor() { }
-  getRideEstimate() {
+  getRideEstimate(): number {
+    return 12;
   }
 }

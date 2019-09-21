@@ -176,7 +176,7 @@ export class TypeaheadComponent implements OnInit, ControlValueAccessor {
   /**
    * Handle to the input element.
    */
-  @ViewChild('inputElement') inputElement: any;
+  @ViewChild('inputElement', {static: false}) inputElement: any;
 
 
   /**

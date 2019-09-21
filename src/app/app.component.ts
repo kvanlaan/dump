@@ -1,9 +1,9 @@
 import { Router } from '@angular/router';
-import { HttpModule, Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import 'rxjs/add/operator/toPromise';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
+
+import { Observable } from 'rxjs';
+
 import { PositionService } from './position.service';
 import { Coords } from './coords.model';
 import { NavComponent } from './nav/nav.component';
@@ -15,8 +15,8 @@ import { NavComponent } from './nav/nav.component';
 })
 export class AppComponent implements OnInit {
   ref;
-  @ViewChild(NavComponent) navComponent: NavComponent;
-  constructor(private positionService: PositionService, private http: Http) {
+  @ViewChild(NavComponent , {static: false}) navComponent: NavComponent;
+  constructor(private positionService: PositionService, private http: HttpClient) {
   }
 
   ngOnInit() {

@@ -4,17 +4,21 @@ import { RecyclingComponent } from './../recycling/recycling.component';
 import { Component, OnInit, ViewChild, ElementRef, HostListener, AfterViewInit } from '@angular/core';
 import { Router, RouterOutlet, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { Item } from './item.model';
-import { Injectable, Inject } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
-import { Observable } from 'rxjs/Rx';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
+
+import * as firebase from 'firebase';
+ import * as firebaseui from 'firebaseui';
+import 'firebase/firestore';
+import 'firebase/auth';
+import 'firebase/storage';
+
+
 import { FormControl } from '@angular/forms';
 import * as similarity from 'similarity';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
 import { PositionService } from '../position.service';
 import { Coords } from '../coords.model';
 import { LocationDialogComponent } from '../location-dialog/location-dialog.component';
+import { LoginDialogComponent } from 'app/login-dialog/login-dialog.component';
 @Component({
   templateUrl: './info.component.html'
 })
@@ -38,7 +42,7 @@ export class NavComponent implements OnInit {
   label = '';
   showBadQuery = false;
   showFancyBadQuery = false;
-  @ViewChild('typeahead') typeahead;
+  @ViewChild('typeahead', {static: false}) typeahead;
   list: Array<Item> = [
     { label: 'steel can', value: 'steel' },
     { label: 'aluminum can', value: 'can' },
@@ -109,12 +113,23 @@ export class NavComponent implements OnInit {
     // { label: 'bodies', value: 'body' },
     // { label: 'dead bodies', value: 'body' }
   ]
+
+  dialogRef;
+  displayName: string = '';
+  email: string = '';
+  // need typing
+  user;
+  ui;
+  database;
+  infoOpen = false;
+  suffix: string = '';
+  login: boolean = false;
+
   @HostListener('window:resize', ['$event'])
   onResize(event) {
     if (!this.searchDone) {
       this.height = window.innerHeight;
     }
-
   }
 
   constructor(private positionService: PositionService,
@@ -132,7 +147,6 @@ export class NavComponent implements OnInit {
   }
 
   // key for google places api AIzaSyCgLu0hpZUwRVjFXlG8OUHd9JvKCV12vvY
-  infoOpen = false;
   openInfoDialog() {
     if (!this.infoOpen) {
       const dialogRef = this.dialog.open(InfoDialogComponent, {
@@ -144,7 +158,53 @@ export class NavComponent implements OnInit {
       });
     }
   }
+  async openLoginModal() {
+    // if (location.href.indexOf('authenticationTriggered') < 0) {
+    //   location.href += '/authenticationTriggered';
+    // }
+    this.dialogRef = this.dialog.open(LoginDialogComponent, {
+      width: '300px'
+    });
 
+    this.dialogRef.afterClosed().subscribe(result => {
+    });
+    await this.ui.start('#firebaseui-container', this.getUiConfig());
+  }
+  getUiConfig() {
+    var uiConfig = {
+      callbacks: {
+        signInSuccessWithAuthResult: function (this, authResult, redirectUrl) {
+          this.login = true;
+          console.log('authResult', authResult);
+          this.suffix = '/' + this.guid;
+          this.displayName = authResult.additionalUserInfo.profile.name.replace(/\s/g, '');
+
+          if (authResult.additionalUserInfo.isNewUser) {
+            this.newUser = true;
+          } else {
+            this.newUser = false;
+          }
+          if (authResult.user) {
+            this.user = authResult.user;
+          }
+          this.dialogRef.close(LoginDialogComponent);
+          return false;
+        }.bind(this),
+        uiShown: function () {
+          // The widget is rendered.
+          // Hide the loader.
+          document.getElementById('loader').style.display = 'none';
+        }
+      },
+      signInSuccessUrl: '' + location.host + '/#user/' + this.displayName + this.suffix,
+      signInOptions: [
+        firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+        firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+        firebase.auth.EmailAuthProvider.PROVIDER_ID
+      ]
+    };
+    return uiConfig;
+  }
   openLocationDialog() {
     console.log('triggered');
     const position = this.positionService.getPosition();
@@ -157,13 +217,10 @@ export class NavComponent implements OnInit {
       dialogRef.afterClosed().subscribe(result => {
       });
     }
-
-
   }
 
   ngOnInit() {
     this.refreshAddress();
-
     let url = new URL(window.location.href);
     if (url.href.indexOf('search') > -1) {
       const urlArr = url.href.split('/home');
@@ -188,6 +245,32 @@ export class NavComponent implements OnInit {
         }
       }
     })
+
+    // setting up firebase
+    var config = {
+      apiKey: "AIzaSyDwYoJzlRs_9_TAzOaMDwqWlhtZm8a0GjM",
+      projectId: "dump-86110",
+      authDomain: "dump-86110.firebaseapp.com",
+      databaseURL: "https://dump-86110.firebaseio.com",
+      storageBucket: "dump-86110.appspot.com",
+      messagingSenderId: "393359246872"
+    };
+    firebase.initializeApp(config);
+    this.database = firebase.firestore();
+    const settings = { timestampsInSnapshots: true };
+    this.database.settings(settings);
+    this.ui = new firebaseui.auth.AuthUI(firebase.auth());
+    this.user = firebase.auth().currentUser;
+    // this.getDarkPatterns();
+
+    firebase.auth().onAuthStateChanged(async function (this, user) {
+      if (!this.login && !user && location.href.indexOf('loggedOut') >= 0 && location.href.indexOf('authenticationTriggered') > - 0) {
+        this.openLoginModal();
+      } else {
+        this.user = user;
+        this.user ? await this.handleSignedInUser() : await this.handleSignedOutUser();
+      }
+    }.bind(this));
   }
   addressReady = true;
 
@@ -234,6 +317,125 @@ export class NavComponent implements OnInit {
       this.router.navigate(['home/search/' + this.label + '/bad/', event]);
     }
   }
+async handleSignedInUser() {
+    this.displayName = this.user.displayName;
+    this.email = this.user.email;
 
+     this.login = true;
+    // this.email = this.user.email;
+    // if (location.hash.split('/') && location.hash.split('/')[1]) {
+    //   this.guid = location.hash.split('/')[1];
+    // }
+
+    // let trimmedName = this.email;
+    // location.href = '#user/' + this.email + '/' + this.guid;
+
+    // if (this.newUser) {
+    //   if (this.savedImageArr.length) {
+    //     for (let img of this.savedImageArr)
+    //       this.saveImageFirebase(img);
+    //   }
+    // } else {
+    //   this.savedImageArr = [];
+    //   if ((!this.newUser) || (this.newUser && this.savedImageArr.length === 0)) {
+
+    //     var storageRef = firebase.storage().ref();
+    //     if (this.ready && this.renderDone) {
+    //       this.imagePopulationDone = false;
+    //     }
+    //     for (let img in this.customImages) {
+    //       let numerator = (parseInt(img) + 1);
+    //       await storageRef.child(trimmedName + '/customImages/uploadCustom' + numerator).getDownloadURL().then((url) => {
+    //         if (url) {
+    //           this.customImagesActive = true;
+    //           this.customImages[parseInt(img)].src = url;
+    //         }
+    //       }).catch(function (error) {
+    //       });
+
+    //       if (parseInt(img) == (this.customImages.length - 1)) {
+    //         this.setCustomImages();
+    //       }
+    //     }
+
+    //     await this.database.collection('users/' + trimmedName + '/images').get().then((querySnapshot) => {
+    //       querySnapshot.forEach((doc) => {
+    //         this.savedImageArr.push(doc.data());
+    //       });
+
+    //       if (querySnapshot.docs.length) {
+    //         this.imagePopulationDone = true;
+
+    //         this.renderImage(0);
+    //       } else {
+    //         this.imagePopulationDone = true;
+
+    //         if (this.savedImageArr.length === 0) {
+    //           this.getRandomArt(true);
+    //         }
+    //       }
+    //     });
+    //   }
+    // }
+  }
+
+  async handleSignedOutUser() {
+    // let guid = '';
+    // if (location.hash.split('/') && location.hash.split('/')[1]) {
+    //   this.guid = location.hash.split('/')[1];
+    //   guid = this.guid;
+    // }
+
+    // if (!document.getElementById('firebaseui-container')) {
+    //   this.login = false;
+
+    //   if (!this.user) {
+    //     // create a rand guid
+    //     if (location.href.indexOf('loggedOut') < 0) {
+    //       this.guid = this.utilities.getGuid();
+    //       location.href = '#loggedOut/' + this.guid;
+    //     } else {
+    //       if (guid) {
+    //         if (this.ready && this.renderDone) {
+    //           this.imagePopulationDone = false;
+    //         }
+    //         var storageRef = firebase.storage().ref();
+    //         for (let img in this.customImages) {
+    //           let numerator = (parseInt(img) + 1);
+    //           await storageRef.child(guid + '/customImages/uploadCustom' + numerator).getDownloadURL().then((url) => {
+    //             if (url) {
+    //               this.customImagesActive = true;
+    //               this.customImages[parseInt(img)].src = url;
+    //             }
+    //           }).catch(function (error) {
+    //             console.log('error', error);
+    //           });
+    //           if (parseInt(img) == (this.customImages.length - 1)) {
+    //             this.setCustomImages();
+
+    //           }
+    //         }
+    //         this.savedImageArr = [];
+    //         await this.database.collection('users/' + guid + '/images').get().then((querySnapshot) => {
+    //           querySnapshot.forEach((doc) => {
+    //             this.savedImageArr.push(doc.data());
+    //           });
+
+    //           if (querySnapshot.docs.length) {
+    //             this.imagePopulationDone = true;
+    //             this.renderImage(0);
+    //           } else {
+    //             this.imagePopulationDone = true;
+
+    //             // this.getRandomArt(true);
+    //           }
+
+    //         });
+
+    //       }
+    //     }
+    //   }
+    // }
+  }
 
 }

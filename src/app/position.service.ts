@@ -1,7 +1,7 @@
 import { Injectable, Output } from '@angular/core';
 import { Coords } from './coords.model';
 import { EventEmitter } from 'events';
-import { Subject } from 'rxjs/Subject';
+import { Subject } from 'rxjs';
 import { MapsAPILoader } from '@agm/core';
 
 declare var google: any;
@@ -9,7 +9,12 @@ declare var google: any;
 export class PositionService {
   position;
   address;
-  constructor(private gmapsApi: MapsAPILoader) { }
+
+  localStorage;
+
+  constructor(private gmapsApi: MapsAPILoader) {
+    this.localStorage = localStorage;
+  }
 
   setPosition(currPosition: Coords) {
     this.position = currPosition;
@@ -25,6 +30,7 @@ export class PositionService {
             if (results[1]) {
               const origin = results[0]
               this.address = origin.formatted_address
+              this.saveToLocal('pickupLocation', this.address);
             }
           };
         }.bind(this))
@@ -32,14 +38,32 @@ export class PositionService {
     }
     this.announceChange();
   }
+
+  getFromLocal(key: string): any {
+    let item = this.localStorage.getItem(key);
+    if (item && item !== "undefined") {
+      return JSON.parse(this.localStorage.getItem(key));
+    }
+
+    return;
+  }
+  saveToLocal(key: string, value: any) {
+    this.localStorage.setItem(key, JSON.stringify(value));
+  }
+
+  deleteFromLocal(key: string) {
+    this.localStorage.removeItem(key);
+  }
+
   getPosition(): Coords {
     return this.position;
   }
-  setAddress(address: String) {
+  setAddress(address: string) {
     this.address = address;
     this.announceChange();
   }
-  getAddress(): String {
+  getAddress(): string {
+    this.address = this.getFromLocal('pickupLocation');
     return this.address;
   }
   // Observable string sources

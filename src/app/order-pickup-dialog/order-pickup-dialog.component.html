@@ -1,56 +1,87 @@
-<button class="material-text float-right hover" style="min-width: 0px !important; margin-right: -20px !important; margin-top: -20px !important; opacity: .5"
+<button class="material-text float-right hover"
+    style="min-width: 0px !important; margin-right: -20px !important; margin-top: -20px !important; opacity: .5"
     mat-icon-button mat-dialog-close>X</button>
 
 <span style="text-align: left; color: rgba(0,0,0,.54)">
     <h2 mat-dialog-title style="color: rgba(0,0,0,.87)"> Please Confirm Pickup Details</h2>
     <mat-dialog-content style="overflow: visible">
+        <form [formGroup]="orderForm" (ngSubmit)="submit()">
         Pick Up Location
         <br>
-      <span>  <mat-form-field style="border-bottom: black 1px solid !important; text-overflow: ellipsis !important;">
-            <input matInput [(ngModel)]="pickUpLocationAddress" value="{{pickUpLocationAddress}}" (setAddress)="setAddressPickUp($event)" style="text-overflow: ellipsis !important; color: black !important; border-bottom: black;"
-                googleplace>
-        </mat-form-field></span>
+        <span>
+            <mat-form-field style="text-overflow: ellipsis !important;">
+                <input matInput formControlName="pickUpCtrl" [(ngModel)]="pickUpLocationAddress" value="{{pickUpLocationAddress}}"
+                    (setAddress)="setAddressPickup($event)"
+                    style="text-overflow: ellipsis !important; color: black !important;" googleplace  required>
+            </mat-form-field>
+        </span>
         Drop Off Location
         <br>
-        <span>  <mat-form-field style="border-bottom: black 1px solid !important; text-overflow: ellipsis !important;">
-              <input matInput [(ngModel)]="dropOffLocationAddress" value="{{dropOffLocationAddress}}" (setAddress)="setAddressDropOff($event)" style="text-overflow: ellipsis !important; color: black !important; border-bottom: black;"
-                  googleplace>
-          </mat-form-field></span>
-         
-
-          Weight
-          <span>  
-              <mat-form-field 
-              style="border-bottom: black 1px solid !important;
+        <span>
+            <mat-form-field style="text-overflow: ellipsis !important;">
+                <input matInput formControlName="dropOffCtrl" [(ngModel)]="dropOffLocationAddress" value="{{dropOffLocationAddress}}"
+                    (setAddress)="setAddressDropOff($event)"
+                    style="text-overflow: ellipsis !important; color: black !important;" googleplace  required>
+            </mat-form-field>
+        </span>
+        Items
+        <br>
+        <mat-form-field class="example-chip-list">
+        <mat-chip-list #chipList>
+            <mat-chip *ngFor="let item of items" [selectable]="selectable" [removable]="removable"
+                (removed)="remove(item)">
+                {{item}}
+                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+            </mat-chip>
+            <input placeholder="Add items..."  matInput
+            #chipInput 
+            formControlName="chipCtrl"
+                [matAutocomplete]="auto" 
+                [matChipInputFor]="chipList"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                (matChipInputTokenEnd)="add($event)">
+        </mat-chip-list>
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+            <mat-option *ngFor="let item of displayedList | async" [value]="item">
+                {{item}}
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+        Weight
+        <br>
+        <span>
+            <mat-form-field style="
                text-overflow: ellipsis !important;">
-            <input matInput [(ngModel)]="weight"
-             style="text-overflow: ellipsis !important; 
-             color: black ! important; 
-             border-bottom: black;">
-        </mat-form-field></span>
-<mat-divider></mat-divider>
-        <h1 class="float-right">Estimate</h1>
-        <h1 class="float-right">{{estimate}}</h1>
-        <button class="float-right" mat-button (click)="submit()">Submit</button>
+                <input matInput formControlName="weightCtrl" type="number"  [(ngModel)]="weight" style="text-overflow: ellipsis !important; 
+             color: black ! important;"  required>
+    <span matSuffix>lbs</span> 
+            </mat-form-field>
+        </span>
+
+    
+        <!-- <mat-divider></mat-divider> -->
+        <span *ngIf="orderForm.valid">
+        <h3  class="text-align-left">Estimate</h3>
+        <h3 class="text-align-left">${{estimate}}.00</h3>
+        </span>
+        <br>
+         <button type="submit" class="float-right" mat-button [disabled]="!orderForm.valid">Submit Order</button>
+    </form>
     </mat-dialog-content>
-    Items
-              
-    <!-- <mat-form-field style="border-bottom: black 1px solid !important; text-overflow: ellipsis !important;">
-    <input matInput [(ngModel)]="items" style="text-overflow: ellipsis !important; color: black !important; border-bottom: black;">
-</mat-form-field> -->
+    <!--               
 
 <mat-form-field class="example-chip-list" style="border-bottom: black 1px solid !important; text-overflow: ellipsis !important;">
-<mat-chip-list #chipList>
-<mat-chip *ngFor="let item of items" [selectable]="selectable"
-     [removable]="removable" (removed)="remove(item)">
-{{item}}
-<mat-icon matChipRemove>cancel</mat-icon>
-</mat-chip>
-<input placeholder="Add items..."
-   [matChipInputFor]="chipList"
-   [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-   [matChipInputAddOnBlur]="addOnBlur"
-   (matChipInputTokenEnd)="add($event)">
-</mat-chip-list>
-</mat-form-field>
+        <mat-chip-list #chipList>
+        <mat-chip *ngFor="let item of items" [selectable]="selectable"
+             [removable]="removable" (removed)="remove(item)">
+        {{item}}
+        <mat-icon matChipRemove>cancel</mat-icon>
+        </mat-chip>
+        <input placeholder="Add items..."
+           [matChipInputFor]="chipList"
+           [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+           [matChipInputAddOnBlur]="addOnBlur"
+           (matChipInputTokenEnd)="add($event)">
+        </mat-chip-list>
+        </mat-form-field> -->
 </span>

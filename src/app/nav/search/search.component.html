@@ -8,11 +8,11 @@
       </mat-panel-title>
     </mat-expansion-panel-header>
   </mat-expansion-panel>
-<mat-card class="border-top padding-top-0 yellow-background margin-auto text-align-center overflow-scroll">
-    <app-recycling *ngIf="showRecycling" [list]="displayedData"></app-recycling>
-    <app-landfill *ngIf="showLandfill" [list]="displayedData"></app-landfill>
-    <app-yelp *ngIf="showYelp" [list]="displayedData"></app-yelp>
-    <mat-card-footer  >
+<mat-card class="border-top padding-top-0 margin-auto text-align-center overflow-scroll">
+    <app-recycling [query]="query" (openOrderPickupModal)="openOrderPickupModal($event)" *ngIf="showRecycling" [list]="displayedData"></app-recycling>
+    <app-landfill [query]="query" (openOrderPickupModal)="openOrderPickupModal($event)" *ngIf="showLandfill" [list]="displayedData"></app-landfill>
+    <app-yelp [query]="query" (openOrderPickupModal)="openOrderPickupModal($event)" *ngIf="showYelp" [list]="displayedData"></app-yelp>
+    <mat-card-footer>
       <mat-paginator style="background: rgb(255, 255, 255)" *ngIf="searchDone" [ngClass]="{'noNav': this.pages === 1}" [length]="finalData.length" [pageSize]="pageSize"  (page)="changePage($event);">
     </mat-paginator>
     </mat-card-footer>

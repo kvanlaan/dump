@@ -5,7 +5,7 @@ import { AgmCoreModule, MapsAPILoader, GoogleMapsAPIWrapper } from '@agm/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { NavComponent, InfoDialogComponent } from './nav/nav.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,7 +20,10 @@ import {
   MatDialog,
   MatFormField,
   MatFormFieldModule,
-  MatIconModule
+  MatIconModule,
+  MatDivider,
+  MatDividerModule,
+  MatChipsModule
 } from '@angular/material';
 import { YelpComponent } from './yelp/yelp.component';
 import { LandfillComponent } from './landfill/landfill.component';
@@ -32,6 +35,9 @@ import { DumpComponent } from './dump/dump.component';
 import { PositionService } from './position.service';
 import { LocationDialogComponent } from './location-dialog/location-dialog.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { OrderPickupDialogComponent } from './order-pickup-dialog/order-pickup-dialog.component';
+import { LoginComponent } from './login/login.component';
+import { LoginDialogComponent } from './login-dialog/login-dialog.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,22 +53,29 @@ import { SignUpComponent } from './sign-up/sign-up.component';
     InfoDialogComponent,
     LocationDialogComponent,
     DumpComponent,
-    SignUpComponent],
+    SignUpComponent,
+    OrderPickupDialogComponent,
+    LoginComponent,
+    LoginDialogComponent],
   entryComponents: [
-    InfoDialogComponent, LocationDialogComponent
+    InfoDialogComponent, LoginDialogComponent, LocationDialogComponent, OrderPickupDialogComponent
   ],
 
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     MatInputModule,
+    MatDividerModule,
     FormsModule,
-    MatAutocompleteModule,
+   MatChipsModule,
+   ReactiveFormsModule,
     MatIconModule,
     MatDialogModule, MatSidenavModule, MatExpansionModule,
-    MatButtonModule, MatFormFieldModule,  MatInputModule, MatPaginatorModule, MatProgressSpinnerModule, MatCheckboxModule, MatCardModule,
+    MatButtonModule, MatFormFieldModule,
+    MatAutocompleteModule,
+    MatInputModule, MatPaginatorModule, MatProgressSpinnerModule, MatCheckboxModule, MatCardModule,
     ReactiveFormsModule,
-    HttpModule,
+    HttpClientModule,
     NgxPaginationModule,
     FlexLayoutModule,
     AppRoutingModule,

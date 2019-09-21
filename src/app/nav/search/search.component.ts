@@ -1,15 +1,21 @@
 import { Item } from './../item.model';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, Input, HostListener } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { PositionService } from '../../position.service';
+import { MatDialog } from '@angular/material';
+import { OrderPickupDialogComponent } from 'app/order-pickup-dialog/order-pickup-dialog.component';
+import { OrderPickupEvent } from 'app/models/OrderPickUpEvent';
+
 declare var google: any;
+
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.css']
 })
+
 export class SearchComponent implements OnInit {
   label: string;
   landFillData: any = [];
@@ -103,7 +109,9 @@ export class SearchComponent implements OnInit {
   ]
   lat;
   lng;
-  constructor(private positionService: PositionService, private http: Http, private router: Router, private route: ActivatedRoute) { }
+  constructor(
+    public dialog: MatDialog,
+    private positionService: PositionService, private http: HttpClient, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
     const position = this.positionService.getPosition();
@@ -186,7 +194,6 @@ export class SearchComponent implements OnInit {
     };
     this.initializeYelp(paramsObj);
     this.http.get(this.yelpUrl)
-      .map(res => res.json())
       .subscribe(
         data => this.data = data,
         err => console.log(err),
@@ -205,14 +212,12 @@ export class SearchComponent implements OnInit {
           }
         }
       );
-      
   }
 
   searchRecycling(query: Item) {
     this.showRecycling = true;
     this.http.get('assets/recyclingCenters.json')
-      .map(res => res.json())
-      .subscribe(
+    .subscribe(
         data => this.data = data,
         err => console.log(err),
         () => {
@@ -301,7 +306,6 @@ export class SearchComponent implements OnInit {
   }
   searchLandFills(query: string) {
     this.http.get('assets/landfills.json')
-      .map(res => res.json())
       .subscribe(
         data => this.data = data,
         err => console.log(err),
@@ -357,6 +361,12 @@ export class SearchComponent implements OnInit {
       this.currPageIndex--
       this.displayedData = this.finalData.slice((this.currPageIndex * 10), ((this.currPageIndex + 1) * 10));
     }
+  }
+  openOrderPickupModal(event: OrderPickupEvent) {
+    const dialogRef = this.dialog.open(OrderPickupDialogComponent, {
+      data: { item: event.item, dropOffLocationAddress: event.dropOffLocationAddress},
+      width: '450px'
+    });
   }
 }
 

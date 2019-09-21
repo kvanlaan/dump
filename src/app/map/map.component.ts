@@ -29,7 +29,7 @@ export class MapComponent implements OnInit {
   destTwo: string;
   orgOne: string;
   orgTwo: string;
-  @ViewChild('directionsList') directionsList: DirectionsComponent;
+  @ViewChild('directionsList', {static: false}) directionsList: DirectionsComponent;
 
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {

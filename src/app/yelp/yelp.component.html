@@ -1,24 +1,23 @@
-    <div fxLayout="row" class="padding-2 border-bottom" *ngFor="let listing of list">
-        <mat-card-header fxFlex="100">
-            <div fxFlex class="padding-left-5 padding-right-5 border-right">
-                <img src="https://maps.googleapis.com/maps/api/streetview?size=600x300&location={{listing.location.coordinate.latitude}},{{listing.location.coordinate.longitude}}&heading=151.78&pitch=-0.76&key=AIzaSyA_JKefOG1BM8rJZoLt7p6OCEdnwPtjiWM"
+<div fxLayout="row" class="padding-5" *ngFor="let listing of list">
+  <mat-card-header fxFlex="100">
+    <div fxFlex.xs="30"  fxFlexOffset.xs="0" fxFlex="15" class="padding-right-5">
+      <img src="https://maps.googleapis.com/maps/api/streetview?size=600x300&location={{listing.location.coordinate.latitude}},{{listing.location.coordinate.longitude}}&heading=151.78&pitch=-0.76&key=AIzaSyA_JKefOG1BM8rJZoLt7p6OCEdnwPtjiWM"
               />
 
               <div fxShow="false" [fxShow.xs]="true" fxLayout="column" class="margin-top-5 padding-left-5">
-                <mat-card-subtitle fxLayout="column"  fxLayoutAlign="end" fxFlex="100" class="font-10 margin-auto">
-                <div>{{listing.display_phone}} </div>
+                <mat-card-subtitle fxLayout="column" fxLayoutAlign="end" fxFlex="100" class="font-10 margin-auto">
+                  <div>{{listing.display_phone}} </div>
                 <div>{{listing.location.address}} </div>
                 <div>{{listing.location.city}}, {{listing.location.state_code}} </div>
                 
-                <button fxFlexAlign="end center" mat-button [routerLink]="['/map/', listing.location.address[0]]">Get Directions</button>
+                <button fxFlexAlign="center center" mat-button [routerLink]="['/map/', listing.location.address[0]]">Get Directions</button>
               </mat-card-subtitle>
             </div>
               </div>
-          <div class="text-align-left border-right padding-left-5" fxFlex="60" fxLayout="column">
-          <mat-card-title fxFlex="10"> {{listing.name}}           
-          </mat-card-title>
-          <mat-card-subtitle fxFlex="90" fxLayout="column">
-              <strong> Categories: </strong> {{listing.categories}}
+              <div class="text-align-left padding-left-5" fxLayout="column" fxFlex.xs="70" fxFlex="60">
+                <mat-card-title> {{listing.name}}           </mat-card-title>
+          <mat-card-subtitle  fxLayout="column">
+            <strong> Categories: </strong> {{listing.categories}}
               <br>
               <br>
               <div fxFlexAlign="start end">
@@ -27,10 +26,10 @@
           </mat-card-subtitle>
         </div>
         <div [fxShow.xs]="false" fxFlex="20" fxLayout="column" class="padding-left-5">
-            <mat-card-subtitle fxLayout="column"  fxLayoutAlign="center" fxFlex="100" class="font-10 margin-auto">
+          <mat-card-subtitle fxLayout="column" fxLayoutAlign="center" fxFlex="100" class="font-10 margin-auto">
             <div>{{listing.display_phone}} </div>
             <div>{{listing.location.address}} </div>
-            <div>{{listing.location.city}}, {{listing.location.state_code}} </div>
+            <div class="border-bottom">{{listing.location.city}}, {{listing.location.state_code}} </div>
             
             <button fxFlexAlign="end center" mat-button [routerLink]="['/map/', listing.location.address[0]]">Get Directions</button>
           </mat-card-subtitle>
