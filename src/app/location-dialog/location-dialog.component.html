@@ -6,7 +6,7 @@
     <mat-dialog-content style="overflow: visible">
         In order to provide you with listings closest to your current location please provide an address:
         <br>
-      <span>  <mat-form-field style="border-bottom: black 1px solid !important; text-overflow: ellipsis !important;">
+      <span>  <mat-form-field style="text-overflow: ellipsis !important;">
             <input matInput [(ngModel)]="address" value="{{address}}" (setAddress)="getAddress($event)" style="text-overflow: ellipsis !important; color: black !important; border-bottom: black;"
                 googleplace>
         </mat-form-field></span>
