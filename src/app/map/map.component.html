@@ -4,7 +4,7 @@
     <div class="green-background white" >
        
       <div fxLayout="row">
-        <i class="material-icons pointer" (click)="goBack()" style="opacity: .75; width: 30px;">reply</i>
+        <i class="material-icons pointer" (click)="goBack()" style="opacity: .75; width: 30px; color: rgba(255,255,255)">reply</i>
         <div fxFlexAlign="end" style="color: rgba(255,255,255,0.45)"> <span> from&nbsp;</span></div>
         <mat-form-field style="color: rgba(255,255,255)" >
           <input matInput style="color: rgba(255,255,255)" [(ngModel)]="origin" value="{{origin}}" (setAddress)="getAddress($event, 'origin')" 
@@ -13,7 +13,7 @@
       </div>
       <i class="material-icons float-right pointer" style="opacity: .75; margin-right:5%; margin-top: -3%;" fxFlexAlign="end" (click)="switch()">import_export</i>
       <div fxLayout="row">
-        <i class="material-icons" style="width: 30px;"></i>
+        <i class="material-icons" style="width: 30px; color: rgba(255,255,255,0.45)"></i>
         <div fxFlexAlign="center" style="color: rgba(255,255,255,0.45)"><span> <span style="opacity: .0">00</span>to&nbsp;</span></div>
         <mat-form-field style="color: rgba(255,255,255)"> 
           <input style="color: rgba(255,255,255)" matInput value="{{destination}}" (setAddress)="getAddress($event, 'destination')"  googleplace>

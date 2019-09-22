@@ -1,8 +1,8 @@
-<div fxLayout="row" class="padding-5" *ngFor="let listing of list">
+<div fxLayout="row" class="padding-5" *ngFor="let listing of list; let i = index">
   <mat-card-header fxFlex="100">
     <div fxFlex.xs="30" fxFlexOffset.xs="0" fxFlex="15" class="padding-right-5">
-      <img
-        src="https://maps.googleapis.com/maps/api/streetview?size=600x300&location={{listing['Latitude']}},{{listing['Latitude']}}&heading=151.78&pitch=-0.76&key=AIzaSyA_JKefOG1BM8rJZoLt7p6OCEdnwPtjiWM" />
+        <img class="float-right" style="height: auto" fxFlex 
+      src="https://maps.googleapis.com/maps/api/streetview?size=600x300&location={{listing['Site Name']}},{{listing['County']}}&heading=151.78&pitch=-0.76&key=AIzaSyA_JKefOG1BM8rJZoLt7p6OCEdnwPtjiWM" />
       <div fxShow="false" [fxShow.xs]="true" fxLayout="column" class="margin-top-5 padding-left-5">
         <mat-card-subtitle fxLayout="column" fxLayoutAlign="end" fxFlex="100" class="font-10 margin-auto">
           <span></span>
