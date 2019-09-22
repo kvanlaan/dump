@@ -1,22 +1,22 @@
 <mat-sidenav-container [style.opacity]="showing" class="container">
   <mat-sidenav #sidenav fxLayout="column" class="sidenav" mode="side" opened="true">
 
-    <div class="green-background white" style="min-height: 72px !important;max-height: 72px !important; height: 72px !important;" >
+    <div class="green-background white" >
        
       <div fxLayout="row">
         <i class="material-icons pointer" (click)="goBack()" style="opacity: .75; width: 30px;">reply</i>
-        <div fxFlexAlign="end" style="font-size: 13px; padding-right: 5px; width: 30px; color: rgba(255,255,255,0.45)"> <span> from</span></div>
-        <mat-form-field style="height: 40px !important; width: 264px">
-          <input matInput [(ngModel)]="origin" value="{{origin}}" (setAddress)="getAddress($event, 'origin')" style="padding-bottom: 0px !important;"
+        <div fxFlexAlign="end" style="color: rgba(255,255,255,0.45)"> <span> from&nbsp;</span></div>
+        <mat-form-field style="color: rgba(255,255,255)" >
+          <input matInput style="color: rgba(255,255,255)" [(ngModel)]="origin" value="{{origin}}" (setAddress)="getAddress($event, 'origin')" 
             googleplace>
         </mat-form-field>
       </div>
       <i class="material-icons float-right pointer" style="opacity: .75; margin-right:5%; margin-top: -3%;" fxFlexAlign="end" (click)="switch()">import_export</i>
       <div fxLayout="row">
         <i class="material-icons" style="width: 30px;"></i>
-        <div fxFlexAlign="center" style="padding-right: 5px; font-size: 13px; width: 30px; color: rgba(255,255,255,0.45)"><span> to</span></div>
-        <mat-form-field style="border-top: 0px !important; width: 264px">
-          <input matInput style="border-top: 0px !important;" value="{{destination}}" (setAddress)="getAddress($event, 'destination')"  googleplace>
+        <div fxFlexAlign="center" style="color: rgba(255,255,255,0.45)"><span> <span style="opacity: .0">00</span>to&nbsp;</span></div>
+        <mat-form-field style="color: rgba(255,255,255)"> 
+          <input style="color: rgba(255,255,255)" matInput value="{{destination}}" (setAddress)="getAddress($event, 'destination')"  googleplace>
         </mat-form-field>
       </div>
     </div>

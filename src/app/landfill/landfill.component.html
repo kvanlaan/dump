@@ -2,7 +2,7 @@
   <mat-card-header fxFlex="100">
     <div fxFlex.xs="30" fxFlexOffset.xs="0" fxFlex="15" class="padding-right-5">
       <img
-        src="https://maps.googleapis.com/maps/api/streetview?size=600x300&location={{listing.Latitude}},{{listing.Longitude}}&heading=151.78&pitch=-0.76&key=AIzaSyA_JKefOG1BM8rJZoLt7p6OCEdnwPtjiWM" />
+        src="https://maps.googleapis.com/maps/api/streetview?size=600x300&location={{listing['Latitude']}},{{listing['Latitude']}}&heading=151.78&pitch=-0.76&key=AIzaSyA_JKefOG1BM8rJZoLt7p6OCEdnwPtjiWM" />
       <div fxShow="false" [fxShow.xs]="true" fxLayout="column" class="margin-top-5 padding-left-5">
         <mat-card-subtitle fxLayout="column" fxLayoutAlign="end" fxFlex="100" class="font-10 margin-auto">
           <span></span>
@@ -19,14 +19,17 @@
           <strong> Permit Holder Name: </strong> {{listing['Permit Holder Name']}} </div>
         <br>
         <div fxFlexAlign="start end">
-          <strong> Status: </strong> {{listing.Status}} </div>
+          <!-- <strong> Status: </strong> {{listing.Status}}  -->
+        </div>
       </mat-card-subtitle>
     </div>
     <div [fxShow.xs]="false" fxFlex="20" fxLayout="column" class="padding-left-5">
       <mat-card-subtitle fxLayout="column" fxLayoutAlign="center" fxFlex="100" class="font-10 margin-auto">
         <span></span>
+        <div *ngIf="listing['Phone']">{{listing['Phone']}}</div>
+        <div *ngIf="listing['Address']">{{listing['Address']}}</div>
         <div>{{listing.County}}&nbsp;County </div>
-        <button fxFlexAlign="end" mat-button [routerLink]="['/map/', listing['Site Name'] + ',' + listing.County]">Get
+        <button  mat-button [routerLink]="['/map/', listing['Site Name'] + ',' + listing.County]">Get
           Directions</button>
       </mat-card-subtitle>
     </div>

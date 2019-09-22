@@ -25,12 +25,14 @@ export class PositionService {
       this.gmapsApi.load().then(() => {
         const geocoder = new google.maps.Geocoder;
         const latlng = { lat: lat, lng: lng };
+        this.position = { lat: lat.toString(), lon: lng.toString() } as Coords;
         geocoder.geocode({ 'location': latlng }, function (results: any, status: any) {
           if (status === google.maps.GeocoderStatus.OK) {
             if (results[1]) {
               const origin = results[0]
               this.address = origin.formatted_address
               this.saveToLocal('pickupLocation', this.address);
+              this.saveToLocal('pickupCoords', this.position);
             }
           };
         }.bind(this))
@@ -56,7 +58,12 @@ export class PositionService {
   }
 
   getPosition(): Coords {
+    if(this.position!== undefined && this.position !== null) {
     return this.position;
+    } else {
+      const position = this.getCoordinates();
+      return position;
+    }
   }
   setAddress(address: string) {
     this.address = address;
@@ -65,6 +72,10 @@ export class PositionService {
   getAddress(): string {
     this.address = this.getFromLocal('pickupLocation');
     return this.address;
+  }
+  getCoordinates(): Coords {
+    const coords = this.getFromLocal('pickupCoords');
+    return coords;
   }
   // Observable string sources
   private positionFail = new Subject<string>();
