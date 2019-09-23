@@ -1,8 +1,16 @@
 <div [style.height.px]="height" fxLayout="column" class="green-background">
 <div class="green-background">
   <div *ngIf="!searchDone">
-    <div (click)="openInfoDialog()" class="circle text-green cursor-hover">?
+    <div fxLayout="row">
+      <div [routerLink]="['/home/']" class="dump-button circle" 
+      matRipple
+      [matRippleCentered]="centered">
+        D
+      </div>
+    <div (click)="openInfoDialog()" class="circle cursor-hover"  matRipple
+    [matRippleCentered]="centered">?
     </div>
+  </div>
    <div class="input-group margin-auto" style="text-align:center; max-width: 400px">
    <div class="input-group-prepend">
         <span class="input-group-text" id="basic-addon1">
@@ -21,11 +29,14 @@
       [searchProperty]="'label'"></typeahead>
   </div>
   <div *ngIf="searchDone"  class="border-bottom" fxLayout="row" fxLayoutWrap>
-    <div (click)="openInfoDialog()" class="circle text-green cursor-hover">?
-    </div>
-    <div [routerLink]="['/home/']" class="dump-button circle text-green">
+
+    <div [routerLink]="['/home/']" class="dump-button circle" 
+    matRipple
+    [matRippleCentered]="centered">
       D
     </div>
+    <div (click)="openInfoDialog()" class="circle cursor-hover">?
+      </div>
     <typeahead style="margin-top: 5px" #typeahead (badQuery)="badQuery($event)" (suggestionSelected)="filterQuery($event)"
       [list]="list" [displayProperty]="'label'" [searchProperty]="'label'"></typeahead>
     

@@ -38,6 +38,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { OrderPickupDialogComponent } from './order-pickup-dialog/order-pickup-dialog.component';
 import { LoginComponent } from './login/login.component';
 import { LoginDialogComponent } from './login-dialog/login-dialog.component';
+import {MatRippleModule} from '@angular/material/core';
 @NgModule({
   declarations: [
     AppComponent,
@@ -68,6 +69,7 @@ import { LoginDialogComponent } from './login-dialog/login-dialog.component';
     MatDividerModule,
     FormsModule,
    MatChipsModule,
+   MatRippleModule,
    ReactiveFormsModule,
     MatIconModule,
     MatDialogModule, MatSidenavModule, MatExpansionModule,

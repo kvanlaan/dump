@@ -1,14 +1,14 @@
 <div *ngIf="searchDone && !showDump" fxFlex="100" class="margin-auto"> 
-  <mat-expansion-panel  style="background: rgb(255, 255, 255)" [disabled]="true" class="margin-auto z-index-3">
-    <mat-expansion-panel-header>
+
+
+  <mat-card style="border-bottom-left-radius: 0px; border-bottom-right-radius: 0px; border-top-left-radius: 0px; border-top-right-radius: 0px;">
       <mat-panel-title fxLayout="row" fxFlex="100">
-        Showing results for&nbsp;<span class="italic bold">{{query}}</span><span [fxShow.xs]="false">&nbsp;nearest to your current location</span><span *ngIf="badQuery">.&nbsp;No listings for 
-            <span class="italic bold">{{badQuery}}.</span>
-           </span> <span fxFlex fxLayoutAlign="end"> Showing 1- <span *ngIf="this.finalData.length < 10">{{this.finalData.length}}</span><span *ngIf="this.finalData.length >= 10">{{pageSize}}</span>&nbsp; of {{this.finalData.length}} </span>
-      </mat-panel-title>
-    </mat-expansion-panel-header>
-  </mat-expansion-panel>
-<mat-card class="border-top padding-top-0 margin-auto text-align-center overflow-scroll">
+          Showing results for&nbsp;<span class="italic bold">{{query}}</span><span [fxShow.xs]="false">&nbsp;nearest to your current location</span><span *ngIf="badQuery">.&nbsp;No listings for 
+              <span class="italic bold">{{badQuery}}.</span>
+             </span> <span fxFlex fxLayoutAlign="end"> Showing 1- <span *ngIf="this.finalData.length < 10">{{this.finalData.length}}</span><span *ngIf="this.finalData.length >= 10">{{pageSize}}</span>&nbsp; of {{this.finalData.length}} </span>
+        </mat-panel-title>
+  </mat-card>
+<mat-card class="border-top padding-top-0 margin-auto text-align-center overflow-scroll" style="padding-right: 0px !important; border-top-left-radius: 0px; border-top-right-radius: 0px;">
     <app-recycling [query]="query" (openOrderPickupModal)="openOrderPickupModal($event)" *ngIf="showRecycling" [list]="displayedData"></app-recycling>
     <app-landfill [query]="query" (openOrderPickupModal)="openOrderPickupModal($event)" *ngIf="showLandfill" [list]="displayedData"></app-landfill>
     <app-yelp [query]="query" (openOrderPickupModal)="openOrderPickupModal($event)" *ngIf="showYelp" [list]="displayedData"></app-yelp>

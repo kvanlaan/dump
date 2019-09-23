@@ -28,7 +28,7 @@
         <span></span>
         <div *ngIf="listing['Phone']">{{listing['Phone']}}</div>
         <div *ngIf="listing['Address']">{{listing['Address']}}</div>
-        <div>{{listing.County}}&nbsp;County </div>
+        <div class="border-bottom">{{listing.County}}&nbsp;County </div>
         <button  mat-button [routerLink]="['/map/', listing['Site Name'] + ',' + listing.County]">Get
           Directions</button>
       </mat-card-subtitle>
