@@ -20,7 +20,7 @@ export class RecyclingComponent implements OnInit {
   }
   buildMaterialsString(materialsString) {
     if((materialsString.indexOf(this.query) > -1)) {
-      materialsString = materialsString.replace(this.query, '<strong class="bold light-red italic">' + this.query + '</strong>')
+      materialsString = materialsString.replace(this.query, '<strong class="bold light-red">' + this.query + '</strong>')
     }
     return materialsString;
 
