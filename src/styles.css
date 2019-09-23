@@ -7,6 +7,9 @@
 .red {
     color: red;
 }
+.light-red {
+  color: lightcoral;
+}
 p+p {
     text-indent: 0;
     margin-top: 0;
@@ -191,7 +194,7 @@ body {
      background-color: white !important;
  }
  .green-background {
-    background-color:#85D9BF;
+    background-color:#4fc09c;
  }
 .material-icons {
     outline: none;
@@ -291,7 +294,7 @@ button:focus {
 
 .loader {
     border: 8px solid #f3f3f3; /* Light grey */
-    border-top: 8px solid  #85D9BF; /* Blue */
+    border-top: 8px solid  #4fc09c; /* Blue */
     border-radius: 50%;
     width: 40px;
     height: 40px;
@@ -532,7 +535,7 @@ img {
 .mat-form-field-underline { 
 }
 .text-green {
-    color:#85D9BF;
+    color:#4fc09c;
  }
 .z-index-3 {
     z-index: 3;

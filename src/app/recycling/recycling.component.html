@@ -19,7 +19,7 @@
       <mat-card-title >{{listing.Business}}</mat-card-title>
       <mat-card-subtitle  fxLayout="column">
         <div>
-          <strong> Materials:</strong> {{listing.Materials}} </div>
+          <strong> Materials:</strong> <span [innerHtml]="buildMaterialsString(listing.Materials)"> </span> </div>
         <br>
         <div fxFlexAlign="start end"><strong> Hours: </strong> {{listing.Hours}} </div>
       </mat-card-subtitle>
